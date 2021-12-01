@@ -1,0 +1,115 @@
+@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300&display=swap");
+
+.header {
+  background-color: rgb(250, 250, 250);
+  height: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0px 20px;
+}
+
+.menu-bars {
+  font-size: 2rem;
+  background: none;
+  text-decoration: none;
+}
+
+.menu-bars-close {
+  font-size: 2rem;
+  text-decoration: none;
+  margin-left: 1rem;
+  margin-right: 7rem;
+}
+
+.nav-menu {
+  background-color: rgb(250, 250, 250);
+  width: 250px;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  left: -100%;
+  transition: 3000ms;
+}
+
+.nav-menu.active {
+  left: 0;
+  transition: 500ms;
+}
+
+.nav-text {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 10px;
+  list-style: none;
+  height: 60px;
+  font-weight: 600;
+}
+
+.nav-text a {
+  text-decoration: none;
+  color: #000;
+  font-size: 18px;
+  width: 97%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  border-radius: 4px;
+}
+
+.nav-text a:hover {
+  background-color: #63d3cd;
+  font-weight: 600;
+}
+
+.nav-menu-items {
+  width: 100%;
+}
+
+.navbar-toggle {
+  background-color: rgb(250, 250, 250);
+  width: 100%;
+  height: 90px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 10px;
+}
+
+.menu_item {
+  margin-left: 16px;
+}
+
+.account_picture {
+  height: 80px;
+  width: 80px;
+}
+
+.time_date {
+  display: flex;
+}
+
+.time {
+  font-family: "Source Sans Pro", sans-serif;
+  font-size: 3.6rem;
+  color: #838383;
+  font-weight: 600;
+}
+
+.date {
+  font-family: "Source Sans Pro", sans-serif;
+  margin-top: 21px;
+  margin-left: 0.5rem;
+  font-size: 1rem;
+  color: #999999;
+  font-weight: 600;
+}
+
+.flexbox_class {
+  display: flex;
+  align-items: center;
+}
