@@ -15,7 +15,7 @@ export const sidebarData = [
   },
   {
     title: "Klijenti",
-    path: "/",
+    path: "/klijenti",
     icon: <Icons.People />,
     cName: "nav-text",
   },

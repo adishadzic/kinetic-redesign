@@ -1,16 +1,16 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import * as Icons from "@mui/icons-material";
 import { sidebarData } from "./sidebarData";
 import { Link } from "react-router-dom";
-import moment from "moment";
 import { styled, alpha } from "@mui/material/styles";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Divider from "@mui/material/Divider";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import "../assets/styles/Sidebar.css";
-import logo from "../assets/images/logo.png";
+// import logo from "../assets/images/logo.png";
 import logo1 from "../assets/images/logo1.png";
+import Backdrop from "@mui/material/Backdrop";
 
 const StyledMenu = styled((props) => (
   <Menu
@@ -69,12 +69,45 @@ function Sidebar() {
 
   const toggleSidebar = () => setSidebar(!sidebar);
 
+  const [date, setDate] = useState(new Date());
+  useEffect(() => {
+    setInterval(() => setDate(new Date()), 30000);
+  }, []);
+
+  let todaysDate = date.toLocaleTimeString([], {
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: false,
+  });
+
+  const [backdropOpen, setBackdropOpen] = React.useState(false);
+
+  const handleCloseBackdrop = () => {
+    setSidebar(false);
+    setBackdropOpen(false);
+  };
+  const handleToggleBackdrop = () => {
+    setSidebar(!sidebar);
+    setBackdropOpen(!open);
+  };
+
+  const weekday = new Array(7);
+  weekday[1] = "Monday";
+  weekday[2] = "Tuesday";
+  weekday[3] = "Wednesday";
+  weekday[4] = "Thursday";
+  weekday[5] = "Friday";
+  weekday[6] = "Saturday";
+  weekday[7] = "Sunday";
+
+  let today = weekday[date.getUTCDay()];
+
   return (
     <>
-      <div className="header">
+      <header className="header">
         <div style={{ display: "flex", alignItems: "center" }}>
           <Link to="#" className="menu-bars">
-            <Icons.Menu onClick={toggleSidebar} />
+            <Icons.Menu onClick={handleToggleBackdrop} />
           </Link>
           <img
             src={logo1}
@@ -85,13 +118,12 @@ function Sidebar() {
 
         <div>
           <div className="time_date">
-            <p className="time">{moment().format("h:mm")}</p>
+            <p className="time">{todaysDate}</p>
             <p className="date">
-              {moment().format("dddd")} <br /> {moment().format("LL")}
+              {today} <br /> {date.toLocaleDateString("en-GB")}
             </p>
           </div>
         </div>
-
         <div className="flexbox_class">
           <Icons.AccountCircle
             style={{
@@ -106,77 +138,86 @@ function Sidebar() {
             aria-haspopup="true"
             aria-expanded={open ? "true" : undefined}
             variant="contained"
-            disableElevation
+            disableelevation="true"
             onClick={handleClick}
-            endIcon={<KeyboardArrowDownIcon />}
+            endicon={<KeyboardArrowDownIcon />}
           />
-          <StyledMenu
-            id="demo-customized-menu"
-            MenuListProps={{
-              "aria-labelledby": "demo-customized-button",
+        </div>
+        <StyledMenu
+          id="demo-customized-menu"
+          MenuListProps={{
+            "aria-labelledby": "demo-customized-button",
+          }}
+          anchorEl={anchorEl}
+          open={open}
+          onClose={handleClose}
+        >
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-evenly",
+              alignItems: "center",
+              paddingTop: 5,
+              paddingBottom: 5,
             }}
-            anchorEl={anchorEl}
-            open={open}
-            onClose={handleClose}
           >
-            <div
+            <p
               style={{
                 display: "flex",
-                justifyContent: "space-evenly",
                 alignItems: "center",
-                paddingTop: 5,
-                paddingBottom: 5,
+                fontWeight: "600",
               }}
             >
-              <p
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  fontWeight: "600",
-                }}
-              >
-                Hello, John <Icons.EmojiPeople sx={{ fontSize: "1.5rem" }} />
-              </p>
-            </div>
-            <MenuItem onClick={handleClose} disableRipple>
-              <Icons.AccountBox />
-              My profile
-            </MenuItem>
-            <Divider sx={{ my: 0.5 }} />
-            <MenuItem onClick={handleClose} disableRipple>
-              <Icons.Logout />
-              Logout
-            </MenuItem>
-          </StyledMenu>
-        </div>
-      </div>
+              Hello, John <Icons.EmojiPeople sx={{ fontSize: "1.5rem" }} />
+            </p>
+          </div>
+          <MenuItem onClick={handleClose} disableRipple>
+            <Icons.AccountBox />
+            My profile
+          </MenuItem>
+          <Divider sx={{ my: 0.5 }} />
+          <MenuItem onClick={handleClose} disableRipple>
+            <Icons.Logout />
+            Logout
+          </MenuItem>
+        </StyledMenu>
+      </header>
 
-      <nav className={sidebar ? "nav-menu active" : "nav-menu"}>
-        <ul className="nav-menu-items" onClick={toggleSidebar}>
-          <li className="navbar-toggle">
-            <Link to="#" className="menu-bars-close">
-              <Icons.Close sx={{ fontSize: "1.5rem" }} />
-            </Link>
-            <img src={logo} height="80" alt="" />
-          </li>
-          {sidebarData.map((item, index) => {
-            return (
-              <li key={index} className={item.cName}>
-                <Link to={item.path}>
-                  {item.icon}
-                  <span className="menu_item">{item.title}</span>
-                </Link>
-              </li>
-            );
-          })}
-          <li className="nav-text">
-            <Link>
-              <Icons.ExitToApp />
-              <span className="menu_item">Logout</span>
-            </Link>
-          </li>
-        </ul>
-      </nav>
+      <Backdrop
+        sx={{
+          zIndex: (theme) => theme.zIndex.drawer + 1,
+          backgroundColor: "rgba(0,0,0,0.3)",
+          backdropFilter: "blur(5px)",
+        }}
+        open={backdropOpen}
+        onClick={handleCloseBackdrop}
+      >
+        <nav className={sidebar ? "nav-menu active" : "nav-menu"}>
+          <ul className="nav-menu-items" onClick={toggleSidebar}>
+            <li className="navbar-toggle">
+              <Link to="#" className="menu-bars-close">
+                <Icons.Close sx={{ fontSize: "3rem" }} />
+              </Link>
+            </li>
+            {sidebarData.map((item, index) => {
+              return (
+                <li key={index} className={item.cName}>
+                  <Link to={item.path}>
+                    {item.icon}
+                    <span className="menu_item">{item.title}</span>
+                  </Link>
+                </li>
+              );
+            })}
+            <li className="nav-text">
+              <Link to="#">
+                <Icons.ExitToApp />
+                <span className="menu_item">Logout</span>
+              </Link>
+            </li>
+          </ul>
+        </nav>
+      </Backdrop>
     </>
   );
 }

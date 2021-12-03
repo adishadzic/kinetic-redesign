@@ -34,6 +34,11 @@
   font-weight: 600;
 }
 
+.Cell-highlightedText-24 {
+  color: #000 !important;
+  font-weight: bold;
+}
+
 .dash_image_finances {
   padding-left: 1.6rem;
   padding-top: 0.5rem;
@@ -70,20 +75,4 @@
 
 .services_table_body_title {
   font-size: 1.4rem;
-}
-
-.dash_card {
-  width: 450px;
-  height: 145px;
-  background: #fff;
-  border-radius: 1rem;
-  box-shadow: 0 5px 15px rgb(0 0 0 / 10%);
-  transition: all 0.35s ease-in-out;
-  color: #000;
-}
-
-.dash_card:hover .services_table_header {
-  background-color: none;
-  color: #fff;
-  cursor: pointer;
 }

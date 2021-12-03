@@ -8,10 +8,12 @@
 }
 
 .main {
-  padding: 0px 0px 0px 260px;
+  display: flex;
+  justify-content: space-evenly;
   font-size: 3rem;
   background-color: rgb(250, 250, 250);
-  height: 150vh;
+  height: 120vh;
+  padding-top: 2rem;
 }
 
 .main h1 {
