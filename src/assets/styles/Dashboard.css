@@ -34,7 +34,8 @@
   font-weight: 600;
 }
 
-.Cell-highlightedText-24 {
+.jss22,
+.Cell-highlightedText-2 {
   color: #000 !important;
   font-weight: bold;
 }
@@ -77,6 +78,25 @@
   font-size: 1.4rem;
 }
 
+.jss2::-webkit-scrollbar {
+  width: 10px;
+}
+
+.jss2::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 3px rgb(51, 148, 145);
+  border-radius: 5rem;
+  margin-top: 3.55rem;
+}
+
+.jss2::-webkit-scrollbar-thumb {
+  background-color: rgb(79, 194, 190);
+  border-radius: 5rem;
+}
+
+.jss2::-webkit-scrollbar-thumb:hover {
+  background: rgb(81, 168, 167);
+}
+
 .makeStyles-container-2::-webkit-scrollbar {
   width: 10px;
 }
@@ -96,6 +116,7 @@
   background: rgb(81, 168, 167);
 }
 
-.makeStyles-container-2 {
+.makeStyles-container-2,
+.jss2 {
   border-radius: 1rem;
 }
