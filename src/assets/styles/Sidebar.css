@@ -18,7 +18,7 @@
 
 .menu-bars-close {
   color: rgb(79, 194, 190);
-  transition: all 0.7s ease-in-out;
+  transition: all 0.65s ease-in-out;
 }
 
 .menu-bars-close:hover {
@@ -28,17 +28,17 @@
 .nav-menu {
   background-color: rgba(48, 62, 72, 0.95);
   width: 290px;
-  height: 100vh;
+  height: 100%;
   display: flex;
   justify-content: center;
   position: fixed;
   top: 0;
-  left: -100%;
-  transition: 0.5s ease-in-out;
+  left: -20%;
   padding-top: 1rem;
 }
 
 .nav-menu.active {
+  transition: all 0.75s ease-in-out;
   left: 0;
 }
 
@@ -62,7 +62,7 @@
   border-radius: 5px;
   font-size: 1.2rem;
   font-weight: 600;
-  transition: 0.2s;
+  transition: 0.1s;
 }
 
 .nav-text a:hover {
