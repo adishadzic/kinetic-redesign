@@ -76,3 +76,13 @@
 .services_table_body_title {
   font-size: 1.4rem;
 }
+
+.makeStyles-container-2::-webkit-scrollbar-track {
+  border-radius: 5rem;
+  margin-top: 3.5rem;
+  box-shadow: inset 0 0 5px rgb(200, 199, 199);
+}
+
+.makeStyles-container-2 {
+  border-radius: 1rem;
+}

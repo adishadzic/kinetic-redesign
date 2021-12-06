@@ -13,6 +13,7 @@
   font-size: 2rem;
   background: none;
   text-decoration: none;
+  color: #000;
 }
 
 .menu-bars-close {
@@ -33,7 +34,7 @@
   position: fixed;
   top: 0;
   left: -100%;
-  transition: 0.7s;
+  transition: 0.5s ease-in-out;
   padding-top: 1rem;
 }
 
@@ -61,6 +62,7 @@
   border-radius: 5px;
   font-size: 1.2rem;
   font-weight: 600;
+  transition: 0.2s;
 }
 
 .nav-text a:hover {
@@ -114,4 +116,19 @@
 .flexbox_class {
   display: flex;
   align-items: center;
+}
+
+.dropdown_item {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-left: 1rem;
+  padding: 0.6rem;
+}
+
+.dropdown_title {
+  color: rgb(79, 194, 190);
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-left: 0.8rem;
 }

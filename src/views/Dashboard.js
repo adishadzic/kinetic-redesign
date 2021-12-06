@@ -6,6 +6,7 @@ import calendar from "../assets/images/calendar.png";
 import newReservation from "../assets/images/new_reservation.png";
 import clients from "../assets/images/clients.png";
 import finances from "../assets/images/finances.png";
+import naplacivanje from "../assets/images/naplacivanje.png";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import EuroIcon from "@mui/icons-material/Euro";
 import { ViewState } from "@devexpress/dx-react-scheduler";
@@ -17,6 +18,7 @@ import {
 import { styled } from "@mui/material/styles";
 
 let currentDate = new Date();
+let hours = currentDate.getHours();
 
 const schedulerData = [
   {
@@ -59,7 +61,7 @@ let services = [
 ];
 
 const Item = styled(Paper)(() => ({
-  height: 150,
+  height: 155,
   overflow: "hidden",
 }));
 
@@ -71,8 +73,14 @@ const ItemBig = styled(Paper)(() => ({
 export default function Dashboard() {
   return (
     <div className="main">
-      <Box sx={{ width: 0.4, marginTop: "1rem" }}>
-        <h4>Dashboard</h4>
+      <Box sx={{ width: 0.4 }}>
+        <h4>
+          {hours < 12
+            ? "Good morning, [name]"
+            : hours < 18
+            ? "Good afternoon, [name]"
+            : "Good evening"}
+        </h4>
         <Box
           display="grid"
           gridTemplateColumns="repeat(8, 1fr)"
@@ -83,7 +91,7 @@ export default function Dashboard() {
             <Item
               sx={{
                 backgroundColor: "#fff",
-                borderRadius: 4,
+                borderRadius: "1rem",
                 boxShadow: "0 5px 15px rgb(0 0 0 / 10%)",
                 transition: "all 0.35s ease-in-out",
                 "&:hover": {
@@ -95,19 +103,16 @@ export default function Dashboard() {
               }}
             >
               <h4 className="dash_title">Kalendar</h4>
-              <img
-                className="dash_image_long"
-                src={calendar}
-                alt=""
-                height="70"
-              />
+              <div className="flexbox">
+                <img src={calendar} alt="" height="70" />
+              </div>
             </Item>
           </Box>
           <Box gridColumn="span 3">
             <Item
               sx={{
                 backgroundColor: "#fff",
-                borderRadius: 4,
+                borderRadius: "1rem",
                 boxShadow: "0 5px 15px rgb(0 0 0 / 10%)",
                 transition: "all 0.35s ease-in-out",
                 "&:hover": {
@@ -119,19 +124,16 @@ export default function Dashboard() {
               }}
             >
               <h4 className="dash_title_alt">Nova rezervacija</h4>
-              <img
-                className="dash_image"
-                src={newReservation}
-                alt=""
-                height="70"
-              />
+              <div className="flexbox">
+                <img src={newReservation} alt="" height="70" />
+              </div>
             </Item>
           </Box>
           <Box gridColumn="span 3">
             <Item
               sx={{
                 backgroundColor: "#fff",
-                borderRadius: 4,
+                borderRadius: "1rem",
                 boxShadow: "0 5px 15px rgb(0 0 0 / 10%)",
                 transition: "all 0.35s ease-in-out",
                 "&:hover": {
@@ -143,13 +145,8 @@ export default function Dashboard() {
               }}
             >
               <h4 className="dash_title_alt">Financije</h4>
-              <div className="image_wrapper">
-                <img
-                  className="dash_image_finances"
-                  src={finances}
-                  alt=""
-                  height="60"
-                />
+              <div className="flexbox">
+                <img src={finances} alt="" height="60" />
               </div>
             </Item>
           </Box>
@@ -157,7 +154,7 @@ export default function Dashboard() {
             <Item
               sx={{
                 backgroundColor: "#fff",
-                borderRadius: 4,
+                borderRadius: "1rem",
                 boxShadow: "0 5px 15px rgb(0 0 0 / 10%)",
                 transition: "all 0.35s ease-in-out",
                 "&:hover": {
@@ -174,7 +171,7 @@ export default function Dashboard() {
                 <img
                   className="dash_image_long_clients"
                   src={clients}
-                  height="55"
+                  height="75"
                   alt=""
                 />
               </div>
@@ -184,7 +181,7 @@ export default function Dashboard() {
             <ItemBig
               sx={{
                 backgroundColor: "#fff",
-                borderRadius: 4,
+                borderRadius: "1rem",
                 boxShadow: "0 5px 15px rgb(0 0 0 / 10%)",
                 transition: "all 0.35s ease-in-out",
                 "&:hover": {
@@ -203,7 +200,7 @@ export default function Dashboard() {
               </div>
               {services.map((service) => {
                 return (
-                  <div className="services_table_body">
+                  <div className="services_table_body" key={service.id}>
                     <p className="services_table_body_title">{service.title}</p>
                     <span>{service.duration}</span>
                     <span>{service.price}</span>
@@ -216,7 +213,7 @@ export default function Dashboard() {
             <Item
               sx={{
                 backgroundColor: "#fff",
-                borderRadius: 4,
+                borderRadius: "1rem",
                 boxShadow: "0 5px 15px rgb(0 0 0 / 10%)",
                 transition: "all 0.35s ease-in-out",
                 "&:hover": {
@@ -229,27 +226,21 @@ export default function Dashboard() {
             >
               <h4 className="dash_title">Naplacivanje</h4>
               <div className="flexbox">
-                <img
-                  className="dash_image_long_clients"
-                  src={clients}
-                  height="55"
-                  alt=""
-                />
+                <img src={naplacivanje} height="70" alt="" />
               </div>
             </Item>
           </Box>
         </Box>
       </Box>
-      <Box sx={{ marginTop: "1rem" }}>
-        <h4>Calendar</h4>
+      <Box sx={{ marginTop: "3.8rem" }}>
         <Paper
           sx={{
             width: 400,
-            height: 830,
+            height: 790,
             marginTop: "2.1rem",
             backgroundColor: "#fff",
-            borderRadius: 4,
             boxShadow: "0 5px 15px rgb(0 0 0 / 10%)",
+            borderRadius: "1rem",
           }}
         >
           <Scheduler data={schedulerData}>

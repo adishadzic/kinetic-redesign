@@ -2,19 +2,17 @@ import React, { useEffect, useState } from "react";
 import * as Icons from "@mui/icons-material";
 import { sidebarData } from "./sidebarData";
 import { Link } from "react-router-dom";
-import { styled, alpha } from "@mui/material/styles";
+import { styled } from "@mui/material/styles";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Divider from "@mui/material/Divider";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import "../assets/styles/Sidebar.css";
-// import logo from "../assets/images/logo.png";
 import logo1 from "../assets/images/logo1.png";
 import Backdrop from "@mui/material/Backdrop";
 
 const StyledMenu = styled((props) => (
   <Menu
-    elevation={0}
     anchorOrigin={{
       vertical: "bottom",
       horizontal: "right",
@@ -27,36 +25,35 @@ const StyledMenu = styled((props) => (
   />
 ))(({ theme }) => ({
   "& .MuiPaper-root": {
-    borderRadius: 6,
-    marginTop: theme.spacing(3),
-    minWidth: 230,
-    color:
-      theme.palette.mode === "light"
-        ? "rgb(55, 65, 81)"
-        : theme.palette.grey[300],
-    boxShadow:
-      "rgb(255, 255, 255) 0px 0px 0px 0px, rgba(0, 0, 0, 0.05) 0px 0px 0px 1px, rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px",
-    "& .MuiMenu-list": {
-      padding: "4px 0",
-    },
+    paddingTop: 0,
+    paddingBottom: 0,
+    backgroundColor: "rgba(48, 62, 72, 0.95)",
+    overflowY: "hidden",
+    marginTop: theme.spacing(2),
+    minWidth: 250,
     "& .MuiMenuItem-root": {
+      margin: "0.6rem",
+      color: "rgb(79, 194, 190)",
+      fontFamily: "Montserrat, sans-serif",
+      fontWeight: "600",
+      fontSize: "1.2rem",
+      transition: "0.4s",
+      borderRadius: "5px",
       "& .MuiSvgIcon-root": {
-        fontSize: 18,
-        color: theme.palette.text.secondary,
+        fontSize: 30,
         marginRight: theme.spacing(1.5),
       },
-      "&:active": {
-        backgroundColor: alpha(
-          theme.palette.primary.main,
-          theme.palette.action.selectedOpacity
-        ),
+      "&:hover": {
+        color: "rgba(48, 62, 72, 1)",
+        backgroundColor: "rgb(79, 194, 190)",
+        transform: "scale(1.05)",
       },
     },
   },
 }));
 
 function Sidebar() {
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -80,7 +77,7 @@ function Sidebar() {
     hour12: false,
   });
 
-  const [backdropOpen, setBackdropOpen] = React.useState(false);
+  const [backdropOpen, setBackdropOpen] = useState(false);
 
   const handleCloseBackdrop = () => {
     setSidebar(false);
@@ -98,7 +95,7 @@ function Sidebar() {
   weekday[4] = "Thursday";
   weekday[5] = "Friday";
   weekday[6] = "Saturday";
-  weekday[7] = "Sunday";
+  weekday[0] = "Sunday";
 
   let today = weekday[date.getUTCDay()];
 
@@ -120,7 +117,12 @@ function Sidebar() {
           <div className="time_date">
             <p className="time">{todaysDate}</p>
             <p className="date">
-              {today} <br /> {date.toLocaleDateString("en-GB")}
+              {today} <br />{" "}
+              {date.toLocaleDateString("en-GB", {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+              })}
             </p>
           </div>
         </div>
@@ -152,32 +154,18 @@ function Sidebar() {
           open={open}
           onClose={handleClose}
         >
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-evenly",
-              alignItems: "center",
-              paddingTop: 5,
-              paddingBottom: 5,
-            }}
-          >
-            <p
-              style={{
-                display: "flex",
-                alignItems: "center",
-                fontWeight: "600",
-              }}
-            >
-              Hello, John <Icons.EmojiPeople sx={{ fontSize: "1.5rem" }} />
-            </p>
-          </div>
-          <MenuItem onClick={handleClose} disableRipple>
+          <MenuItem onClick={handleClose}>
             <Icons.AccountBox />
             My profile
           </MenuItem>
-          <Divider sx={{ my: 0.5 }} />
-          <MenuItem onClick={handleClose} disableRipple>
-            <Icons.Logout />
+          <Divider
+            style={{
+              backgroundColor: "rgba(255,255,255, 0.5)",
+              margin: "0px 10px",
+            }}
+          />
+          <MenuItem onClick={handleClose}>
+            <Icons.ExitToApp />
             Logout
           </MenuItem>
         </StyledMenu>
