@@ -41,14 +41,16 @@
   font-family: "Source Sans Pro", sans-serif !important;
 }
 
-.Label-text-35 {
+.Label-text-35,
+.jss32 {
   color: #838383 !important;
   font-size: 0.8rem !important;
   font-family: "Source Sans Pro", sans-serif !important;
   font-weight: 600 !important;
 }
 
-.Label-label-34 {
+.Label-label-34,
+.jss31 {
   line-height: 2.7rem !important;
 }
 
