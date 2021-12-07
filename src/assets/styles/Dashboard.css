@@ -122,17 +122,20 @@
   border-radius: 1rem;
 }
 
-.makeStyles-appointment-85 {
+.makeStyles-appointment-85,
+.jss66 {
   background-color: rgba(110, 219, 214, 0.85) !important;
   padding: 0.5rem;
 }
 
-.makeStyles-appointment-85:hover {
+.makeStyles-appointment-85:hover,
+.jss66 {
   background-color: rgba(110, 219, 214, 1) !important;
   cursor: pointer;
 }
 
-.VerticalAppointment-container-101 {
+.VerticalAppointment-container-101,
+.jss63 {
   color: var(--anthracite-col) !important;
   font-size: 0.9rem !important;
   font-family: "Source Sans Pro", sans-serif !important;
