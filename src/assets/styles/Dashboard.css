@@ -123,24 +123,25 @@
 }
 
 .makeStyles-appointment-85,
-.jss66 {
+.jss63 {
   background-color: rgba(110, 219, 214, 0.85) !important;
   padding: 0.5rem;
 }
 
 .makeStyles-appointment-85:hover,
-.jss66 {
+.jss63 {
   background-color: rgba(110, 219, 214, 1) !important;
   cursor: pointer;
 }
 
 .VerticalAppointment-container-101,
-.jss63 {
+.jss77 {
   color: var(--anthracite-col) !important;
   font-size: 0.9rem !important;
   font-family: "Source Sans Pro", sans-serif !important;
 }
 
-.AppointmentsContainer-container-84 {
+.AppointmentsContainer-container-84,
+.jss62 {
   left: 1.3% !important;
 }
