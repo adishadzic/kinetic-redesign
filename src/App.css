@@ -1,4 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap");
+:root {
+  --anthracite-col: rgb(34, 36, 37);
+  --black: #000;
+}
 
 * {
   box-sizing: border-box;
@@ -17,11 +21,10 @@
 }
 
 html::-webkit-scrollbar {
-  width: 10px;
+  width: 8px;
 }
 
 html::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 5px grey;
   border-radius: 5rem;
 }
 
@@ -31,5 +34,5 @@ html::-webkit-scrollbar-thumb {
 }
 
 html::-webkit-scrollbar-thumb:hover {
-  background: rgb(81, 168, 167);
+  background: rgb(79, 194, 190, 0.7);
 }

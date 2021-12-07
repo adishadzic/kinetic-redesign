@@ -44,7 +44,7 @@ const StyledMenu = styled((props) => (
         marginRight: theme.spacing(1.5),
       },
       "&:hover": {
-        color: "rgba(48, 62, 72, 1)",
+        color: "#000",
         backgroundColor: "rgb(79, 194, 190)",
         transform: "scale(1.05)",
       },

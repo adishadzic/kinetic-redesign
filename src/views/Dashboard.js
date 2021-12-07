@@ -22,13 +22,33 @@ let hours = currentDate.getHours();
 
 const schedulerData = [
   {
-    startDate: "2021-12-03T09:45",
-    endDate: "2021-12-03T10:45",
+    startDate: "2021-12-07T08:00",
+    endDate: "2021-12-07T09:45",
     title: "Meeting",
   },
   {
-    startDate: "2021-12-03T12:45",
-    endDate: "2021-12-03T14:45",
+    startDate: "2021-12-07T10:45",
+    endDate: "2021-12-07T11:35",
+    title: "Training",
+  },
+  {
+    startDate: "2021-12-08T08:00",
+    endDate: "2021-12-08T09:45",
+    title: "Meeting",
+  },
+  {
+    startDate: "2021-12-08T10:45",
+    endDate: "2021-12-08T11:35",
+    title: "Training",
+  },
+  {
+    startDate: "2021-12-09T08:00",
+    endDate: "2021-12-09T09:45",
+    title: "Meeting",
+  },
+  {
+    startDate: "2021-12-09T10:45",
+    endDate: "2021-12-09T11:35",
     title: "Training",
   },
 ];
@@ -74,13 +94,13 @@ export default function Dashboard() {
   return (
     <div className="main">
       <Box sx={{ width: 0.4 }}>
-        <h4>
+        <h5>
           {hours < 12
-            ? "Good morning, [name]"
+            ? `Good morning, $[name]`
             : hours < 18
-            ? "Good afternoon, [name]"
-            : "Good evening"}
-        </h4>
+            ? `Good afternoon, $[name]`
+            : `Good evening, $[name]`}
+        </h5>
         <Box
           display="grid"
           gridTemplateColumns="repeat(8, 1fr)"
@@ -93,7 +113,7 @@ export default function Dashboard() {
                 backgroundColor: "#fff",
                 borderRadius: "1rem",
                 boxShadow: "0 5px 15px rgb(0 0 0 / 10%)",
-                transition: "all 0.35s ease-in-out",
+                transition: "all 0.3s ease-in-out",
                 "&:hover": {
                   transform: "scale(1.03)",
                   backgroundColor: "#3f4142",
@@ -114,7 +134,7 @@ export default function Dashboard() {
                 backgroundColor: "#fff",
                 borderRadius: "1rem",
                 boxShadow: "0 5px 15px rgb(0 0 0 / 10%)",
-                transition: "all 0.35s ease-in-out",
+                transition: "all 0.3s ease-in-out",
                 "&:hover": {
                   transform: "scale(1.03)",
                   backgroundColor: "#3f4142",
@@ -135,7 +155,7 @@ export default function Dashboard() {
                 backgroundColor: "#fff",
                 borderRadius: "1rem",
                 boxShadow: "0 5px 15px rgb(0 0 0 / 10%)",
-                transition: "all 0.35s ease-in-out",
+                transition: "all 0.3s ease-in-out",
                 "&:hover": {
                   transform: "scale(1.03)",
                   backgroundColor: "#3f4142",
@@ -156,7 +176,7 @@ export default function Dashboard() {
                 backgroundColor: "#fff",
                 borderRadius: "1rem",
                 boxShadow: "0 5px 15px rgb(0 0 0 / 10%)",
-                transition: "all 0.35s ease-in-out",
+                transition: "all 0.3s ease-in-out",
                 "&:hover": {
                   transform: "scale(1.03)",
                   backgroundColor: "#3f4142",
@@ -183,7 +203,7 @@ export default function Dashboard() {
                 backgroundColor: "#fff",
                 borderRadius: "1rem",
                 boxShadow: "0 5px 15px rgb(0 0 0 / 10%)",
-                transition: "all 0.35s ease-in-out",
+                transition: "all 0.3s ease-in-out",
                 "&:hover": {
                   transform: "scale(1.03)",
                   backgroundColor: "#3f4142",
@@ -215,7 +235,7 @@ export default function Dashboard() {
                 backgroundColor: "#fff",
                 borderRadius: "1rem",
                 boxShadow: "0 5px 15px rgb(0 0 0 / 10%)",
-                transition: "all 0.35s ease-in-out",
+                transition: "all 0.3s ease-in-out",
                 "&:hover": {
                   transform: "scale(1.03)",
                   backgroundColor: "#3f4142",
@@ -232,11 +252,11 @@ export default function Dashboard() {
           </Box>
         </Box>
       </Box>
-      <Box sx={{ marginTop: "3.8rem" }}>
+      <Box sx={{ marginTop: "3rem" }}>
         <Paper
           sx={{
-            width: 400,
-            height: 790,
+            width: 420,
+            height: 800,
             marginTop: "2.1rem",
             backgroundColor: "#fff",
             boxShadow: "0 5px 15px rgb(0 0 0 / 10%)",
@@ -245,7 +265,12 @@ export default function Dashboard() {
         >
           <Scheduler data={schedulerData}>
             <ViewState currentDate={currentDate} />
-            <DayView startDayHour={8} endDayHour={17} excludedDays={[0, 6]} />
+            <DayView
+              startDayHour={8}
+              endDayHour={17}
+              excludedDays={[0, 6]}
+              displayName="nameee"
+            />
             <Appointments />
           </Scheduler>
         </Paper>
