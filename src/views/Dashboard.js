@@ -16,14 +16,15 @@ import {
   Appointments,
 } from "@devexpress/dx-react-scheduler-material-ui";
 import { styled } from "@mui/material/styles";
+import { useHistory } from "react-router";
 
 let currentDate = new Date();
 let hours = currentDate.getHours();
 
 const schedulerData = [
   {
-    startDate: "2021-12-07T08:00",
-    endDate: "2021-12-07T09:45",
+    startDate: "2021-12-11T08:00",
+    endDate: "2021-12-11T09:45",
     title: "Meeting",
   },
   {
@@ -91,6 +92,8 @@ const ItemBig = styled(Paper)(() => ({
 }));
 
 export default function Dashboard() {
+  let history = useHistory();
+
   return (
     <div className="main">
       <Box sx={{ width: 0.4 }}>
@@ -121,6 +124,9 @@ export default function Dashboard() {
                   cursor: "pointer",
                 },
               }}
+              onClick={() => {
+                history.push("/calendar");
+              }}
             >
               <h4 className="dash_title">Kalendar</h4>
               <div className="flexbox">
@@ -143,7 +149,7 @@ export default function Dashboard() {
                 },
               }}
             >
-              <h4 className="dash_title_alt">Nova rezervacija</h4>
+              <h4 className="dash_title">Nova rezervacija</h4>
               <div className="flexbox">
                 <img src={newReservation} alt="" height="70" />
               </div>
@@ -164,7 +170,7 @@ export default function Dashboard() {
                 },
               }}
             >
-              <h4 className="dash_title_alt">Financije</h4>
+              <h4 className="dash_title">Financije</h4>
               <div className="flexbox">
                 <img src={finances} alt="" height="60" />
               </div>
@@ -244,7 +250,7 @@ export default function Dashboard() {
                 },
               }}
             >
-              <h4 className="dash_title">Naplacivanje</h4>
+              <h4 className="dash_title">Naplaćivanje</h4>
               <div className="flexbox">
                 <img src={naplacivanje} height="70" alt="" />
               </div>

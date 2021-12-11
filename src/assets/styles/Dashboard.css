@@ -4,24 +4,6 @@
   font-size: 1.4rem;
 }
 
-.dash_image_long {
-  padding-left: 1.6rem;
-  padding-top: 0.5rem;
-  margin-top: 0.3rem;
-}
-
-.dash_title_alt {
-  padding-left: 1.6rem;
-  padding-top: 1.2rem;
-  font-size: 1.4rem;
-}
-
-.dash_image {
-  padding-left: 1.6rem;
-  padding-top: 0.5rem;
-  margin-top: 0.3rem;
-}
-
 .flexbox {
   display: flex;
   justify-content: space-between;
@@ -105,7 +87,7 @@
 .jss2::-webkit-scrollbar-track,
 .makeStyles-container-2::-webkit-scrollbar-track {
   border-radius: 5rem;
-  margin-top: 4.1rem;
+  margin-top: 4.05rem;
 }
 
 .jss2::-webkit-scrollbar-thumb,
@@ -125,19 +107,23 @@
 }
 
 .makeStyles-appointment-85,
-.jss63 {
+.jss63,
+.makeStyles-appointment-229 {
   background-color: rgba(110, 219, 214, 0.85) !important;
   padding: 0.5rem;
+  transition: all 0.3s ease-in-out;
 }
 
 .makeStyles-appointment-85:hover,
-.jss63:hover {
-  background-color: rgba(110, 219, 214, 1) !important;
+.jss63:hover,
+.makeStyles-appointment-229:hover {
+  background-color: rgb(110, 209, 204) !important;
   cursor: pointer;
 }
 
 .VerticalAppointment-container-101,
-.jss77 {
+.jss77,
+.VerticalAppointment-content-240 {
   color: var(--anthracite-col) !important;
   font-size: 0.9rem !important;
   font-family: "Source Sans Pro", sans-serif !important;
@@ -145,5 +131,9 @@
 
 .AppointmentsContainer-container-84,
 .jss62 {
-  left: 1.3% !important;
+  left: 0.35% !important;
+}
+
+.makeStyles-table-18 {
+  height: 65px;
 }

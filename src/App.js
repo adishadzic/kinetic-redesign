@@ -2,8 +2,8 @@ import "./App.css";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import React from "react";
 import Sidebar from "./components/Sidebar";
-// import Login from "./views/Login";
 import Dashboard from "./views/Dashboard";
+import Calendar from "./views/Calendar";
 
 const App = () => {
   return (
@@ -11,7 +11,8 @@ const App = () => {
       <Router>
         <Sidebar />
         <Switch>
-          <Route path="/" component={Dashboard} />
+          <Route path="/" exact component={Dashboard} />
+          <Route path="/calendar" component={Calendar} />
         </Switch>
       </Router>
     </div>

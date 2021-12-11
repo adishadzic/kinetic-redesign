@@ -30,7 +30,7 @@ const StyledMenu = styled((props) => (
     backgroundColor: "rgba(48, 62, 72, 0.95)",
     overflowY: "hidden",
     marginTop: theme.spacing(2),
-    minWidth: 250,
+    minWidth: 220,
     "& .MuiMenuItem-root": {
       margin: "0.6rem",
       color: "rgb(79, 194, 190)",
@@ -71,12 +71,11 @@ function Sidebar() {
     setInterval(() => setDate(new Date()), 30000);
   }, []);
 
-  let todaysDate = date.toLocaleTimeString([], {
-    hour: "2-digit",
+  let time = date.toLocaleTimeString("en-GB", {
+    hour: "numeric",
     minute: "2-digit",
     hour12: false,
   });
-
   const [backdropOpen, setBackdropOpen] = useState(false);
 
   const handleCloseBackdrop = () => {
@@ -115,7 +114,7 @@ function Sidebar() {
 
         <div>
           <div className="time_date">
-            <p className="time">{todaysDate}</p>
+            <p className="time">{time}</p>
             <p className="date">
               {today} <br />{" "}
               {date.toLocaleDateString("en-GB", {
