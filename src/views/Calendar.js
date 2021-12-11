@@ -20,18 +20,18 @@ const currentDate = new Date();
 
 const appointments = [
   {
-    startDate: "2021-12-10T08:00",
-    endDate: "2021-12-10T09:45",
+    startDate: "2021-12-12T08:00",
+    endDate: "2021-12-12T09:45",
     title: "Meeting",
   },
   {
-    startDate: "2021-12-10T10:45",
-    endDate: "2021-12-10T11:35",
+    startDate: "2021-12-12T10:45",
+    endDate: "2021-12-12T11:35",
     title: "Training",
   },
   {
-    startDate: "2021-12-07T08:00",
-    endDate: "2021-12-07T09:45",
+    startDate: "2021-12-13T08:00",
+    endDate: "2021-12-13T09:45",
     title: "Meeting",
   },
   {
@@ -41,12 +41,12 @@ const appointments = [
   },
   {
     startDate: "2021-12-15T08:00",
-    endDate: "2021-12-015T09:45",
+    endDate: "2021-12-15T09:45",
     title: "Meeting",
   },
   {
-    startDate: "2021-12-09T10:45",
-    endDate: "2021-12-09T11:35",
+    startDate: "2021-12-17T10:45",
+    endDate: "2021-12-17T11:35",
     title: "Training",
   },
 ];

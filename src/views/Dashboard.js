@@ -23,23 +23,23 @@ let hours = currentDate.getHours();
 
 const schedulerData = [
   {
-    startDate: "2021-12-11T08:00",
-    endDate: "2021-12-11T09:45",
+    startDate: "2021-12-12T08:00",
+    endDate: "2021-12-12T09:45",
     title: "Meeting",
   },
   {
-    startDate: "2021-12-07T10:45",
-    endDate: "2021-12-07T11:35",
+    startDate: "2021-12-12T10:45",
+    endDate: "2021-12-12T11:35",
     title: "Training",
   },
   {
-    startDate: "2021-12-08T08:00",
-    endDate: "2021-12-08T09:45",
+    startDate: "2021-12-13T08:00",
+    endDate: "2021-12-13T09:45",
     title: "Meeting",
   },
   {
-    startDate: "2021-12-08T10:45",
-    endDate: "2021-12-08T11:35",
+    startDate: "2021-12-14T10:45",
+    endDate: "2021-12-14T11:35",
     title: "Training",
   },
   {
@@ -271,13 +271,8 @@ export default function Dashboard() {
         >
           <Scheduler data={schedulerData}>
             <ViewState currentDate={currentDate} />
-            <DayView
-              startDayHour={8}
-              endDayHour={17}
-              excludedDays={[0, 6]}
-              displayName="nameee"
-            />
-            <Appointments />
+            <DayView startDayHour={8} endDayHour={17} excludedDays={[0, 6]} />
+            <Appointments sx={{}} />
           </Scheduler>
         </Paper>
       </Box>

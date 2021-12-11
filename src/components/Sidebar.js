@@ -72,7 +72,7 @@ function Sidebar() {
   }, []);
 
   let time = date.toLocaleTimeString("en-GB", {
-    hour: "numeric",
+    hour: "2-digit",
     minute: "2-digit",
     hour12: false,
   });
