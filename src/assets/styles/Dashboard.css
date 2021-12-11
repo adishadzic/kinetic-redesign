@@ -109,7 +109,9 @@
 .makeStyles-appointment-85,
 .jss63,
 .makeStyles-appointment-229,
-.jss135 {
+.jss135,
+.jss66,
+.jss138 {
   background-color: rgba(110, 219, 214, 0.85) !important;
   padding: 0.5rem;
   transition: all 0.3s ease-in-out;
@@ -118,7 +120,9 @@
 .makeStyles-appointment-85:hover,
 .jss63:hover,
 .makeStyles-appointment-229:hover,
-.jss135:hover {
+.jss135:hover,
+.jss66:hover,
+.jss138:hover {
   background-color: rgb(110, 209, 204) !important;
   cursor: pointer;
 }
@@ -134,7 +138,7 @@
 
 .AppointmentsContainer-container-84,
 .jss62,
-.jss135 {
+.jss134 {
   left: 0.35% !important;
 }
 
