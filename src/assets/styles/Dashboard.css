@@ -111,7 +111,8 @@
 .makeStyles-appointment-229,
 .jss135,
 .jss66,
-.jss138 {
+.jss138,
+.jss175 {
   background-color: rgba(110, 219, 214, 0.85) !important;
   padding: 0.5rem;
   transition: all 0.3s ease-in-out;
@@ -122,7 +123,8 @@
 .makeStyles-appointment-229:hover,
 .jss135:hover,
 .jss66:hover,
-.jss138:hover {
+.jss138:hover,
+.jss175:hover {
   background-color: rgb(110, 209, 204) !important;
   cursor: pointer;
 }
