@@ -1,0 +1,76 @@
+.css-1qycibx-MuiTableContainer-root::-webkit-scrollbar {
+  width: 8px;
+}
+
+.css-1qycibx-MuiTableContainer-root::-webkit-scrollbar-track {
+  border-radius: 5rem;
+  margin-top: 0.1rem;
+}
+
+.css-1qycibx-MuiTableContainer-root::-webkit-scrollbar-thumb {
+  background-color: rgb(79, 194, 190);
+  border-radius: 5rem;
+}
+
+.css-1qycibx-MuiTableContainer-root::-webkit-scrollbar-thumb:hover {
+  background: rgb(79, 194, 190, 0.7);
+}
+
+.css-1qycibx-MuiTableContainer-root {
+  overflow-x: hidden !important;
+}
+
+.MuiTableRow-root.MuiTableRow-hover {
+  transition: all 0.1s ease-in-out;
+}
+
+.MuiTableRow-root.MuiTableRow-hover:hover {
+  background-color: rgba(110, 219, 214, 0.35) !important;
+  transform: scale(1.005);
+}
+
+.css-1q1u3t4-MuiTableRow-root,
+.MuiTableRow-root,
+.MuiTableRow-head {
+  border-radius: 1rem;
+}
+
+.searchInput {
+  border: none;
+  border-radius: 2rem;
+  background-color: rgba(110, 219, 214, 0.3);
+  display: flex;
+  align-items: center;
+  margin-right: 2em;
+  padding: 0rem 3rem 0rem 1.5rem;
+}
+
+.searchInput input {
+  border: none;
+  outline: none;
+  background: none;
+  margin-left: 1rem;
+  font-size: 1.2rem;
+  font-family: "Montserrat", sans-serif !important;
+}
+
+.css-y8ay40-MuiTableCell-root {
+  font-family: "Montserrat", sans-serif !important;
+  font-weight: 600 !important;
+}
+
+.add_button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.9rem 1rem;
+  background-color: rgba(48, 62, 72, 0.95);
+  transition: all 0.2s ease-in-out;
+  border-radius: 50%;
+  color: rgb(79, 194, 190);
+}
+
+.add_button:hover {
+  cursor: pointer;
+  background-color: rgba(48, 62, 72, 0.85);
+}

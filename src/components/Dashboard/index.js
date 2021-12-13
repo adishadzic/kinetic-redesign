@@ -1,12 +1,11 @@
 import React from "react";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
-import "../assets/styles/Dashboard.css";
-import calendar from "../assets/images/calendar.png";
-import newReservation from "../assets/images/new_reservation.png";
-import clients from "../assets/images/clients.png";
-import finances from "../assets/images/finances.png";
-import naplacivanje from "../assets/images/naplacivanje.png";
+import calendar from "../../assets/images/calendar.png";
+import newReservation from "../../assets/images/new_reservation.png";
+import clients from "../../assets/images/clients.png";
+import finances from "../../assets/images/finances.png";
+import naplacivanje from "../../assets/images/naplacivanje.png";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import EuroIcon from "@mui/icons-material/Euro";
 import { ViewState } from "@devexpress/dx-react-scheduler";
@@ -17,6 +16,7 @@ import {
 } from "@devexpress/dx-react-scheduler-material-ui";
 import { styled } from "@mui/material/styles";
 import { useHistory } from "react-router";
+import "./styles.css";
 
 let currentDate = new Date();
 let hours = currentDate.getHours();
@@ -189,6 +189,9 @@ export default function Dashboard() {
                   color: " #fff",
                   cursor: "pointer",
                 },
+              }}
+              onClick={() => {
+                history.push("/clients");
               }}
             >
               <h4 className="dash_title">Klijenti</h4>

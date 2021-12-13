@@ -7,9 +7,9 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Divider from "@mui/material/Divider";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import "../assets/styles/Sidebar.css";
-import logo1 from "../assets/images/logo1.png";
+import logo1 from "../../assets/images/logo1.png";
 import Backdrop from "@mui/material/Backdrop";
+import "./styles.css";
 
 const StyledMenu = styled((props) => (
   <Menu
@@ -52,7 +52,7 @@ const StyledMenu = styled((props) => (
   },
 }));
 
-function Sidebar() {
+export default function Sidebar() {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -208,5 +208,3 @@ function Sidebar() {
     </>
   );
 }
-
-export default Sidebar;

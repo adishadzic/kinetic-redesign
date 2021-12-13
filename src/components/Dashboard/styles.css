@@ -106,49 +106,8 @@
   border-radius: 1rem;
 }
 
-.makeStyles-appointment-85,
-.jss63,
-.makeStyles-appointment-229,
-.jss135,
-.jss66,
-.jss138,
-.jss175,
-.jss491 {
-  background-color: rgba(110, 219, 214, 0.85) !important;
-  padding: 0.5rem;
-  transition: all 0.3s ease-in-out;
-}
-
-.makeStyles-appointment-85:hover,
-.jss63:hover,
-.makeStyles-appointment-229:hover,
-.jss135:hover,
-.jss66:hover,
-.jss138:hover,
-.jss175:hover,
-.jss491:hover {
-  background-color: rgb(110, 209, 204) !important;
-  cursor: pointer;
-}
-
-.VerticalAppointment-container-101,
-.jss77,
-.VerticalAppointment-content-240,
-.jss144,
-.jss189,
-.jss505 {
-  color: var(--anthracite-col) !important;
-  font-size: 0.9rem !important;
-  font-family: "Source Sans Pro", sans-serif !important;
-}
-
 .AppointmentsContainer-container-84,
 .jss62,
 .jss134 {
   left: 0.35% !important;
-}
-
-.makeStyles-table-18,
-.jss17 {
-  height: 65px;
 }

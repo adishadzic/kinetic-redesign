@@ -15,6 +15,7 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import MenuItem from "@mui/material/MenuItem";
+import "./styles.css";
 
 const currentDate = new Date();
 
@@ -111,8 +112,9 @@ export default function Calendar() {
               borderRadius: "1rem",
               boxShadow: "0 5px 15px rgb(0 0 0 / 10%)",
               transition: "all 0.2s ease-in-out",
-              fontSize: "1.5rem",
+              fontSize: "1.3rem",
               fontFamily: "Montserrat, sans-serif",
+              fontWeight: "600",
               color: "rgb(79, 194, 190)",
               "&:hover": {
                 backgroundColor: "rgba(48, 62, 72, 0.85)",
@@ -122,7 +124,7 @@ export default function Calendar() {
             onClick={handleClickOpen}
           >
             <AddIcon sx={{ fontSize: 35 }} />
-            <p>Add new</p>
+            <span>Add new</span>
           </Button>
         </div>
         <Paper
