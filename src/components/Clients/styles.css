@@ -1,22 +1,22 @@
-.css-1qycibx-MuiTableContainer-root::-webkit-scrollbar {
+.MuiTableContainer-root::-webkit-scrollbar {
   width: 8px;
 }
 
-.css-1qycibx-MuiTableContainer-root::-webkit-scrollbar-track {
+.MuiTableContainer-root::-webkit-scrollbar-track {
   border-radius: 5rem;
   margin-top: 0.1rem;
 }
 
-.css-1qycibx-MuiTableContainer-root::-webkit-scrollbar-thumb {
+.MuiTableContainer-root::-webkit-scrollbar-thumb {
   background-color: rgb(79, 194, 190);
   border-radius: 5rem;
 }
 
-.css-1qycibx-MuiTableContainer-root::-webkit-scrollbar-thumb:hover {
+.MuiTableContainer-root::-webkit-scrollbar-thumb:hover {
   background: rgb(79, 194, 190, 0.7);
 }
 
-.css-1qycibx-MuiTableContainer-root {
+.MuiTableContainer-root {
   overflow-x: hidden !important;
 }
 
