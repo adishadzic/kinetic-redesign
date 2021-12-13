@@ -263,9 +263,9 @@ export default function Dashboard() {
       </Box>
       <Box sx={{ marginTop: "3rem" }}>
         <Paper
-          sx={{
-            width: 420,
-            height: 800,
+          style={{
+            width: 460,
+            height: 770,
             marginTop: "2.1rem",
             backgroundColor: "#fff",
             boxShadow: "0 5px 15px rgb(0 0 0 / 10%)",
@@ -275,7 +275,7 @@ export default function Dashboard() {
           <Scheduler data={schedulerData}>
             <ViewState currentDate={currentDate} />
             <DayView startDayHour={8} endDayHour={17} excludedDays={[0, 6]} />
-            <Appointments sx={{}} />
+            <Appointments />
           </Scheduler>
         </Paper>
       </Box>
