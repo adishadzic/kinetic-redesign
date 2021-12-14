@@ -64,7 +64,7 @@
   align-items: center;
   justify-content: center;
   padding: 0.9rem 1rem;
-  background-color: rgba(48, 62, 72, 0.95);
+  background-color: rgba(48, 62, 72, 0.8);
   transition: all 0.2s ease-in-out;
   border-radius: 50%;
   color: rgb(79, 194, 190);
@@ -72,5 +72,5 @@
 
 .add_button:hover {
   cursor: pointer;
-  background-color: rgba(48, 62, 72, 0.85);
+  background-color: rgba(48, 62, 72, 1);
 }

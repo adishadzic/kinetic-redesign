@@ -10,6 +10,7 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import logo1 from "../../assets/images/logo1.png";
 import Backdrop from "@mui/material/Backdrop";
 import "./styles.css";
+import { useHistory } from "react-router";
 
 const StyledMenu = styled((props) => (
   <Menu
@@ -53,6 +54,8 @@ const StyledMenu = styled((props) => (
 }));
 
 export default function Sidebar() {
+  const history = useHistory();
+
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -108,7 +111,10 @@ export default function Sidebar() {
           <img
             src={logo1}
             alt=""
-            style={{ marginLeft: "1rem", height: "5rem" }}
+            style={{ marginLeft: "1rem", height: "5rem", cursor: "pointer" }}
+            onClick={() => {
+              history.push("/");
+            }}
           />
         </div>
 

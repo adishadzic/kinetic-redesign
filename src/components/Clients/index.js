@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -14,6 +14,7 @@ import "./styles.css";
 import PersonAddAltIcon from "@mui/icons-material/PersonAddAlt";
 import SearchIcon from "@mui/icons-material/Search";
 import { Tooltip } from "@mui/material";
+import HashLoader from "react-spinners/HashLoader";
 
 const columns = [
   { id: "name", label: "NAME", width: 80 },
@@ -26,6 +27,17 @@ const columns = [
 export default function Clients() {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [clients, setClients] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    setLoading(true);
+    setInterval(() => {
+      setClients(rows);
+      setLoading(false);
+    }, 1200);
+    // eslint-disable-next-line
+  }, []);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -93,42 +105,57 @@ export default function Clients() {
                   </TableCell>
                 </TableRow>
               </TableHead>
-              <TableBody>
-                {rows
-                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                  .map((row) => {
-                    return (
-                      <TableRow
-                        hover
-                        role="checkbox"
-                        tabIndex={-1}
-                        key={row.id}
-                      >
-                        {columns.map((column) => {
-                          const value = row[column.id];
-                          return (
-                            <TableCell
-                              key={column.id}
-                              style={{ textAlign: "center" }}
-                            >
-                              {column.format && typeof value === "number"
-                                ? column.format(value)
-                                : value}
-                            </TableCell>
-                          );
-                        })}
-                        <TableCell style={{ textAlign: "center" }}>
-                          <Tooltip title="Edit" placement="left">
-                            <EditIcon />
-                          </Tooltip>
-                          <Tooltip title="Delete" placement="right">
-                            <DeleteOutlineIcon />
-                          </Tooltip>
-                        </TableCell>
-                      </TableRow>
-                    );
-                  })}
-              </TableBody>
+              {loading ? (
+                <TableBody>
+                  <TableRow style={{ height: 580 }}>
+                    <TableCell></TableCell>
+                    <TableCell></TableCell>
+                    <TableCell></TableCell>
+                    <TableCell align="left">
+                      <HashLoader color="#4FC2BE" size={80} />
+                    </TableCell>
+                    <TableCell></TableCell>
+                    <TableCell></TableCell>
+                  </TableRow>
+                </TableBody>
+              ) : (
+                <TableBody>
+                  {clients
+                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                    .map((row) => {
+                      return (
+                        <TableRow
+                          hover
+                          role="checkbox"
+                          tabIndex={-1}
+                          key={row.id}
+                        >
+                          {columns.map((column) => {
+                            const value = row[column.id];
+                            return (
+                              <TableCell
+                                key={column.id}
+                                style={{ textAlign: "center" }}
+                              >
+                                {column.format && typeof value === "number"
+                                  ? column.format(value)
+                                  : value}
+                              </TableCell>
+                            );
+                          })}
+                          <TableCell style={{ textAlign: "center" }}>
+                            <Tooltip title="Edit" placement="left">
+                              <EditIcon />
+                            </Tooltip>
+                            <Tooltip title="Delete" placement="right">
+                              <DeleteOutlineIcon />
+                            </Tooltip>
+                          </TableCell>
+                        </TableRow>
+                      );
+                    })}
+                </TableBody>
+              )}
             </Table>
           </TableContainer>
           <TablePagination
