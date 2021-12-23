@@ -2,7 +2,7 @@ import React from "react";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import calendar from "../../assets/images/calendar.png";
-import newReservation from "../../assets/images/new_reservation.png";
+import newReservation from "../../assets/images/group.png";
 import clients from "../../assets/images/clients.png";
 import finances from "../../assets/images/finances.png";
 import naplacivanje from "../../assets/images/naplacivanje.png";
@@ -82,7 +82,7 @@ let services = [
 ];
 
 const Item = styled(Paper)(() => ({
-  height: 155,
+  height: 145,
   overflow: "hidden",
 }));
 
@@ -108,7 +108,9 @@ export default function Dashboard() {
           display="grid"
           gridTemplateColumns="repeat(8, 1fr)"
           gap={5}
-          sx={{ marginTop: "2rem" }}
+          sx={{
+            marginTop: "2rem",
+          }}
         >
           <Box gridColumn="span 5">
             <Item
@@ -130,7 +132,7 @@ export default function Dashboard() {
             >
               <h4 className="dash_title">Kalendar</h4>
               <div className="flexbox">
-                <img src={calendar} alt="" height="70" />
+                <img src={calendar} alt="" height="60" />
               </div>
             </Item>
           </Box>
@@ -151,7 +153,12 @@ export default function Dashboard() {
             >
               <h4 className="dash_title">Nova rezervacija</h4>
               <div className="flexbox">
-                <img src={newReservation} alt="" height="70" />
+                <img
+                  className="image"
+                  src={newReservation}
+                  alt=""
+                  height="60"
+                />
               </div>
             </Item>
           </Box>
@@ -255,7 +262,7 @@ export default function Dashboard() {
             >
               <h4 className="dash_title">Naplaćivanje</h4>
               <div className="flexbox">
-                <img src={naplacivanje} height="70" alt="" />
+                <img src={naplacivanje} height="60" alt="" />
               </div>
             </Item>
           </Box>
@@ -265,7 +272,7 @@ export default function Dashboard() {
         <Paper
           style={{
             width: 460,
-            height: 770,
+            height: 755,
             marginTop: "2.1rem",
             backgroundColor: "#fff",
             boxShadow: "0 5px 15px rgb(0 0 0 / 10%)",

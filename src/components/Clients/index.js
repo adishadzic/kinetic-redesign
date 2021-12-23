@@ -11,10 +11,18 @@ import rows from "./rows";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import EditIcon from "@mui/icons-material/Edit";
 import "./styles.css";
-import PersonAddAltIcon from "@mui/icons-material/PersonAddAlt";
+import PersonAddAlt1Icon from "@mui/icons-material/PersonAddAlt1";
 import SearchIcon from "@mui/icons-material/Search";
 import { Tooltip } from "@mui/material";
 import HashLoader from "react-spinners/HashLoader";
+import TextField from "@mui/material/TextField";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
+import MenuItem from "@mui/material/MenuItem";
+import Button from "@mui/material/Button";
 
 const columns = [
   { id: "name", label: "NAME", width: 80 },
@@ -28,11 +36,19 @@ export default function Clients() {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [clients, setClients] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   useEffect(() => {
-    setLoading(true);
-    setInterval(() => {
+    setTimeout(() => {
       setClients(rows);
       setLoading(false);
     }, 1200);
@@ -55,6 +71,7 @@ export default function Clients() {
           style={{
             display: "flex",
             justifyContent: "space-between",
+            alignItems: "center",
           }}
         >
           <h5 style={{ marginRight: "2rem" }}>Clients</h5>
@@ -62,8 +79,8 @@ export default function Clients() {
             <SearchIcon sx={{ fontSize: "2rem" }} />
             <input placeholder="Find a client..."></input>
           </div>
-          <div className="add_button">
-            <PersonAddAltIcon />
+          <div className="add_button" onClick={handleClickOpen}>
+            <PersonAddAlt1Icon style={{ color: "rgba(48, 62, 72, 1)" }} />
           </div>
         </div>
         <Paper
@@ -169,6 +186,53 @@ export default function Clients() {
           />
         </Paper>
       </div>
+      <Dialog open={open} onClose={handleClose}>
+        <DialogTitle>Add new client</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            Fill out the form below to add a new client.
+          </DialogContentText>
+          <br />
+          <p>Insert client's first name</p>
+          <TextField variant="outlined" />
+          <br />
+          <br />
+          <p>Insert client's last name</p>
+          <TextField variant="outlined" />
+          <br />
+          <br />
+          <p>Insert client's email address</p>
+          <TextField variant="outlined" type="email" />
+          <br />
+          <br />
+          <p>Insert client's phone number</p>
+          <TextField variant="outlined" />
+          <br />
+          <br />
+          <p>Insert client's date of birth</p>
+          <TextField
+            id="date"
+            type="date"
+            sx={{ width: 250 }}
+            InputLabelProps={{
+              shrink: true,
+            }}
+          />
+          <br />
+          <br />
+          <p>Select client's sex</p>
+          <TextField select sx={{ width: 250 }}>
+            <MenuItem value="M">Male</MenuItem>
+            <MenuItem value="F">Female</MenuItem>
+          </TextField>
+          <br />
+          <br />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}>Cancel</Button>
+          <Button onClick={handleClose}>Add</Button>
+        </DialogActions>
+      </Dialog>
     </div>
   );
 }

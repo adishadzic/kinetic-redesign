@@ -31,7 +31,7 @@ const StyledMenu = styled((props) => (
     backgroundColor: "rgba(48, 62, 72, 0.95)",
     overflowY: "hidden",
     marginTop: theme.spacing(2),
-    minWidth: 220,
+    minWidth: 200,
     "& .MuiMenuItem-root": {
       margin: "0.6rem",
       color: "rgb(79, 194, 190)",

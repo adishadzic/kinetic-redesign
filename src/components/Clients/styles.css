@@ -1,18 +1,22 @@
-.MuiTableContainer-root::-webkit-scrollbar {
+.MuiTableContainer-root::-webkit-scrollbar,
+.MuiDialogContent-root::-webkit-scrollbar {
   width: 8px;
 }
 
-.MuiTableContainer-root::-webkit-scrollbar-track {
+.MuiTableContainer-root::-webkit-scrollbar-track,
+.MuiDialogContent-root::-webkit-scrollbar-track {
   border-radius: 5rem;
   margin-top: 0.1rem;
 }
 
-.MuiTableContainer-root::-webkit-scrollbar-thumb {
+.MuiTableContainer-root::-webkit-scrollbar-thumb,
+.MuiDialogContent-root::-webkit-scrollbar-thumb {
   background-color: rgb(79, 194, 190);
   border-radius: 5rem;
 }
 
-.MuiTableContainer-root::-webkit-scrollbar-thumb:hover {
+.MuiTableContainer-root::-webkit-scrollbar-thumb:hover,
+.MuiDialogContent-root::-webkit-scrollbar-thumb:hover {
   background: rgb(79, 194, 190, 0.7);
 }
 
@@ -42,7 +46,7 @@
   display: flex;
   align-items: center;
   margin-right: 2em;
-  padding: 0rem 3rem 0rem 1.5rem;
+  padding: 0.7rem 1.5rem;
 }
 
 .searchInput input {
@@ -64,13 +68,19 @@
   align-items: center;
   justify-content: center;
   padding: 0.9rem 1rem;
-  background-color: rgba(48, 62, 72, 0.8);
   transition: all 0.2s ease-in-out;
-  border-radius: 50%;
-  color: rgb(79, 194, 190);
+  border-radius: 50px;
+  background-color: rgba(110, 219, 214, 0.6);
+  transition: all 0.5s ease-in-out;
 }
 
 .add_button:hover {
   cursor: pointer;
-  background-color: rgba(48, 62, 72, 1);
+  background-color: rgba(110, 219, 214, 0.8);
+  transform: scale(1.05);
+}
+
+.MuiDialog-paper {
+  width: 450px;
+  height: 700px;
 }

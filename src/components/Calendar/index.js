@@ -99,33 +99,13 @@ export default function Calendar() {
         <div
           style={{
             display: "flex",
-            justifyContent: "space-between",
+            alignItems: "center",
           }}
         >
-          <h5>Reservations - week view</h5>
-          <Button
-            sx={{
-              display: "flex",
-              justifyContent: "space-evenly",
-              width: 240,
-              backgroundColor: "rgba(48, 62, 72, 0.7)",
-              borderRadius: "1rem",
-              boxShadow: "0 5px 15px rgb(0 0 0 / 10%)",
-              transition: "all 0.2s ease-in-out",
-              fontSize: "1.3rem",
-              fontFamily: "Montserrat, sans-serif",
-              fontWeight: "600",
-              color: "rgb(79, 194, 190)",
-              "&:hover": {
-                backgroundColor: "rgba(48, 62, 72, 0.85)",
-                cursor: "pointer",
-              },
-            }}
-            onClick={handleClickOpen}
-          >
-            <AddIcon sx={{ fontSize: 35 }} />
-            <span>Add new</span>
-          </Button>
+          <h6 style={{ marginRight: 20 }}>Appointments for this week</h6>
+          <div className="add_button" onClick={handleClickOpen}>
+            <AddIcon style={{ color: "rgba(48, 62, 72, 1)", fontSize: 25 }} />
+          </div>
         </div>
         <Paper
           sx={{
@@ -145,7 +125,11 @@ export default function Calendar() {
         </Paper>
       </div>
 
-      <Dialog open={open} onClose={handleClose}>
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        style={{ height: "630px", marginTop: 110 }}
+      >
         <DialogTitle>Add new appointment</DialogTitle>
         <DialogContent>
           <DialogContentText>
