@@ -15,18 +15,49 @@ import {
   DialogContent,
   DialogContentText,
   DialogTitle,
-  MenuItem,
   Button,
+  FormControl,
+  InputLabel,
+  Select,
 } from "@mui/material";
-import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
-import EditIcon from "@mui/icons-material/Edit";
+import {
+  DeleteOutline,
+  Phone,
+  Edit,
+  Search,
+  PersonAddAlt1,
+} from "@mui/icons-material";
 import "./styles.css";
-import PersonAddAlt1Icon from "@mui/icons-material/PersonAddAlt1";
-import SearchIcon from "@mui/icons-material/Search";
 import HashLoader from "react-spinners/HashLoader";
 import Client from "../../api/index";
 import moment from "moment";
-import PhoneIcon from "@mui/icons-material/Phone";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+toast.configure();
+
+const successNotification = () =>
+  toast.success("Client successfully added! 👌", {
+    position: "top-right",
+    autoClose: 2000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "dark",
+  });
+
+const errorNotification = () =>
+  toast.error("Error occured 🤯", {
+    position: "top-right",
+    autoClose: 3000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "dark",
+  });
 
 const columns = [
   { id: "name", label: "NAME", width: 80 },
@@ -41,8 +72,12 @@ export default function Clients() {
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [clients, setClients] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [open, setOpen] = React.useState(false);
-  const [formData, setFormData] = React.useState({});
+  const [open, setOpen] = useState(false);
+  const [formData, setFormData] = useState({
+    error: false,
+    errorMessage: {},
+  });
+  const [searchValue, setSearchValue] = useState("");
 
   const formattedClientsArray = async () => {
     try {
@@ -58,11 +93,20 @@ export default function Clients() {
           sex: client.client_sex,
         };
       });
-      setClients(newArray);
+      setClients(newArray.reverse());
       setLoading(false);
     } catch (error) {
       console.error(error);
     }
+  };
+
+  const searchData = (searchValue) => {
+    return clients.filter(
+      (client) =>
+        client.name.toLowerCase().includes(searchValue) ||
+        client.name.includes(searchValue) ||
+        client.email.includes(searchValue)
+    );
   };
 
   const handleClickOpen = () => {
@@ -74,9 +118,14 @@ export default function Clients() {
   };
 
   useEffect(() => {
-    formattedClientsArray();
+    if (searchValue !== "") {
+      let result = searchData(searchValue);
+      setClients(result);
+    } else {
+      formattedClientsArray();
+    }
     // eslint-disable-next-line
-  }, []);
+  }, [searchValue]);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -87,7 +136,48 @@ export default function Clients() {
     setPage(0);
   };
 
-  // const onSubmit = () => {};
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    let isError = false;
+
+    //eslint-disable-next-line
+    const emailIsValid = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(
+      formData.client_email
+    );
+
+    const phoneNumberIsValid =
+      /^[0-9\b]+$/.test(formData.client_phone_number) &&
+      !(formData.client_phone_number.length < 10) &&
+      !(formData.client_phone_number.length >= 15);
+
+    if (!emailIsValid) {
+      isError = true;
+      setFormData({
+        ...formData,
+        error: true,
+        errorMessage: { email: "Invalid email" },
+      });
+    } else if (!phoneNumberIsValid) {
+      isError = true;
+      setFormData({
+        ...formData,
+        error: true,
+        errorMessage: { phoneNumber: "Please enter a valid phone number" },
+      });
+    } else if (!isError) {
+      setFormData({ ...formData, error: false, errorMessage: {} });
+      let mutation = formData;
+      delete mutation.error;
+      delete mutation.errorMessage;
+
+      Client.addNewClient(formData);
+      handleClose();
+      successNotification();
+      setTimeout(() => window.location.reload(), 1500);
+    } else {
+      errorNotification();
+    }
+  };
 
   return (
     <div className="main">
@@ -101,11 +191,15 @@ export default function Clients() {
         >
           <h5 style={{ marginRight: "2rem" }}>Clients</h5>
           <div className="searchInput">
-            <SearchIcon sx={{ fontSize: "2rem" }} />
-            <input placeholder="Find a client..."></input>
+            <Search sx={{ fontSize: "2rem" }} />
+            <input
+              placeholder="Find a client..."
+              value={searchValue}
+              onChange={(e) => setSearchValue(e.target.value)}
+            ></input>
           </div>
           <div className="add_button" onClick={handleClickOpen}>
-            <PersonAddAlt1Icon style={{ color: "rgba(48, 62, 72, 1)" }} />
+            <PersonAddAlt1 style={{ color: "rgba(48, 62, 72, 1)" }} />
           </div>
         </div>
         <Paper
@@ -195,12 +289,10 @@ export default function Clients() {
                             }}
                           >
                             <Tooltip title="Edit" placement="left">
-                              <EditIcon style={{ cursor: "pointer" }} />
+                              <Edit style={{ cursor: "pointer" }} />
                             </Tooltip>
                             <Tooltip title="Delete" placement="bottom">
-                              <DeleteOutlineIcon
-                                style={{ cursor: "pointer" }}
-                              />
+                              <DeleteOutline style={{ cursor: "pointer" }} />
                             </Tooltip>
                             <Tooltip title="Call" placement="right">
                               <a
@@ -210,7 +302,7 @@ export default function Clients() {
                                   alignItems: "center",
                                 }}
                               >
-                                <PhoneIcon
+                                <Phone
                                   sx={{ color: "black", cursor: "pointer" }}
                                 />
                               </a>
@@ -234,17 +326,17 @@ export default function Clients() {
           />
         </Paper>
       </div>
-      <Dialog open={open} onClose={handleClose}>
+      <Dialog open={open}>
         <DialogTitle>Add new client</DialogTitle>
-        <form>
+        <form onSubmit={onSubmit}>
           <DialogContent>
             <DialogContentText>
               Fill out the form below to add a new client.
             </DialogContentText>
             <br />
-            <p>Insert client's first name</p>
             <TextField
-              variant="outlined"
+              variant="filled"
+              label="First name"
               onChange={(e) =>
                 setFormData({ ...formData, client_first_name: e.target.value })
               }
@@ -252,9 +344,9 @@ export default function Clients() {
             />
             <br />
             <br />
-            <p>Insert client's last name</p>
             <TextField
-              variant="outlined"
+              variant="filled"
+              label="Last name"
               onChange={(e) =>
                 setFormData({ ...formData, client_last_name: e.target.value })
               }
@@ -262,20 +354,24 @@ export default function Clients() {
             />
             <br />
             <br />
-            <p>Insert client's email address</p>
             <TextField
-              variant="outlined"
+              variant="filled"
+              label="Email"
               type="email"
               onChange={(e) =>
                 setFormData({ ...formData, client_email: e.target.value })
               }
               required
+              error={
+                formData.error && formData.errorMessage.email !== undefined
+              }
+              helperText={formData.errorMessage.email}
             />
             <br />
             <br />
-            <p>Insert client's phone number</p>
             <TextField
-              variant="outlined"
+              variant="filled"
+              label="Phone number"
               onChange={(e) =>
                 setFormData({
                   ...formData,
@@ -283,13 +379,19 @@ export default function Clients() {
                 })
               }
               required
+              error={
+                formData.error &&
+                formData.errorMessage.phoneNumber !== undefined
+              }
+              helperText={formData.errorMessage.phoneNumber}
             />
             <br />
             <br />
-            <p>Insert client's date of birth</p>
             <TextField
+              variant="filled"
               id="date"
               type="date"
+              label="Date of birth"
               sx={{ width: 250 }}
               InputLabelProps={{
                 shrink: true,
@@ -301,24 +403,34 @@ export default function Clients() {
             />
             <br />
             <br />
-            <p>Select client's sex</p>
-            <TextField
-              select
-              sx={{ width: 250 }}
-              onChange={(e) =>
-                setFormData({ ...formData, client_sex: e.target.value })
-              }
-              required
-            >
-              <MenuItem value="M">Male</MenuItem>
-              <MenuItem value="F">Female</MenuItem>
-            </TextField>
-            <br />
+            <FormControl variant="filled" required style={{ width: "47%" }}>
+              <InputLabel htmlFor="serviceLine-native-required">Sex</InputLabel>
+              <Select
+                native
+                name="client_sex"
+                onChange={(e) =>
+                  setFormData({ ...formData, client_sex: e.target.value })
+                }
+              >
+                <option aria-label="None" value="" />
+                <option value={"M"}>Male</option>
+                <option value={"F"}>Female</option>
+              </Select>
+            </FormControl>
             <br />
           </DialogContent>
           <DialogActions>
             <Button onClick={handleClose}>Cancel</Button>
-            <Button type="submit">Add</Button>
+            <Button
+              variant="contained"
+              type="submit"
+              style={{
+                backgroundColor: "rgba(110, 219, 214, 1)",
+                color: "rgba(48, 62, 72, 1)",
+              }}
+            >
+              Add
+            </Button>
           </DialogActions>
         </form>
       </Dialog>

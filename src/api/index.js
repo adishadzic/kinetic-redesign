@@ -14,6 +14,9 @@ const Client = {
     let response = await Connect.get("/clients");
     return response.data;
   },
+  async addNewClient(client) {
+    return Connect.post("/clients", client);
+  },
 };
 
 export default Client;
