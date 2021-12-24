@@ -1,28 +1,32 @@
 import React, { useState, useEffect } from "react";
-import Paper from "@mui/material/Paper";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TablePagination from "@mui/material/TablePagination";
-import TableRow from "@mui/material/TableRow";
-import rows from "./rows";
+import {
+  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TablePagination,
+  TableRow,
+  Tooltip,
+  TextField,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  MenuItem,
+  Button,
+} from "@mui/material";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import EditIcon from "@mui/icons-material/Edit";
 import "./styles.css";
 import PersonAddAlt1Icon from "@mui/icons-material/PersonAddAlt1";
 import SearchIcon from "@mui/icons-material/Search";
-import { Tooltip } from "@mui/material";
 import HashLoader from "react-spinners/HashLoader";
-import TextField from "@mui/material/TextField";
-import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
-import DialogTitle from "@mui/material/DialogTitle";
-import MenuItem from "@mui/material/MenuItem";
-import Button from "@mui/material/Button";
+import Client from "../../api/index";
+import moment from "moment";
+import PhoneIcon from "@mui/icons-material/Phone";
 
 const columns = [
   { id: "name", label: "NAME", width: 80 },
@@ -36,8 +40,30 @@ export default function Clients() {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [clients, setClients] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [open, setOpen] = React.useState(false);
+  const [formData, setFormData] = React.useState({});
+
+  const formattedClientsArray = async () => {
+    try {
+      setLoading(true);
+      let res = await Client.getAllClients();
+      let newArray = res.map((client) => {
+        return {
+          id: client.client_id,
+          name: client.client_first_name + " " + client.client_last_name,
+          number: client.client_phone_number,
+          email: client.client_email,
+          dob: moment(client.client_birth_date).format("MMMM Do YYYY"),
+          sex: client.client_sex,
+        };
+      });
+      setClients(newArray);
+      setLoading(false);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -48,10 +74,7 @@ export default function Clients() {
   };
 
   useEffect(() => {
-    setTimeout(() => {
-      setClients(rows);
-      setLoading(false);
-    }, 1200);
+    formattedClientsArray();
     // eslint-disable-next-line
   }, []);
 
@@ -63,6 +86,8 @@ export default function Clients() {
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
+
+  const onSubmit = () => {};
 
   return (
     <div className="main">
@@ -160,12 +185,35 @@ export default function Clients() {
                               </TableCell>
                             );
                           })}
-                          <TableCell style={{ textAlign: "center" }}>
+                          <TableCell
+                            style={{
+                              display: "flex",
+                              alignItems: "center",
+                              justifyContent: "center",
+                              textAlign: "center",
+                              gap: 8,
+                            }}
+                          >
                             <Tooltip title="Edit" placement="left">
-                              <EditIcon />
+                              <EditIcon style={{ cursor: "pointer" }} />
                             </Tooltip>
-                            <Tooltip title="Delete" placement="right">
-                              <DeleteOutlineIcon />
+                            <Tooltip title="Delete" placement="bottom">
+                              <DeleteOutlineIcon
+                                style={{ cursor: "pointer" }}
+                              />
+                            </Tooltip>
+                            <Tooltip title="Call" placement="right">
+                              <a
+                                href={`tel: row.number`}
+                                style={{
+                                  display: "flex",
+                                  alignItems: "center",
+                                }}
+                              >
+                                <PhoneIcon
+                                  sx={{ color: "black", cursor: "pointer" }}
+                                />
+                              </a>
                             </Tooltip>
                           </TableCell>
                         </TableRow>
@@ -178,7 +226,7 @@ export default function Clients() {
           <TablePagination
             rowsPerPageOptions={[10, 25, 100]}
             component="div"
-            count={rows.length}
+            count={clients.length}
             rowsPerPage={rowsPerPage}
             page={page}
             onPageChange={handleChangePage}
@@ -188,50 +236,91 @@ export default function Clients() {
       </div>
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>Add new client</DialogTitle>
-        <DialogContent>
-          <DialogContentText>
-            Fill out the form below to add a new client.
-          </DialogContentText>
-          <br />
-          <p>Insert client's first name</p>
-          <TextField variant="outlined" />
-          <br />
-          <br />
-          <p>Insert client's last name</p>
-          <TextField variant="outlined" />
-          <br />
-          <br />
-          <p>Insert client's email address</p>
-          <TextField variant="outlined" type="email" />
-          <br />
-          <br />
-          <p>Insert client's phone number</p>
-          <TextField variant="outlined" />
-          <br />
-          <br />
-          <p>Insert client's date of birth</p>
-          <TextField
-            id="date"
-            type="date"
-            sx={{ width: 250 }}
-            InputLabelProps={{
-              shrink: true,
-            }}
-          />
-          <br />
-          <br />
-          <p>Select client's sex</p>
-          <TextField select sx={{ width: 250 }}>
-            <MenuItem value="M">Male</MenuItem>
-            <MenuItem value="F">Female</MenuItem>
-          </TextField>
-          <br />
-          <br />
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={handleClose}>Add</Button>
-        </DialogActions>
+        <form>
+          <DialogContent>
+            <DialogContentText>
+              Fill out the form below to add a new client.
+            </DialogContentText>
+            <br />
+            <p>Insert client's first name</p>
+            <TextField
+              variant="outlined"
+              onChange={(e) =>
+                setFormData({ ...formData, client_first_name: e.target.value })
+              }
+              required
+            />
+            <br />
+            <br />
+            <p>Insert client's last name</p>
+            <TextField
+              variant="outlined"
+              onChange={(e) =>
+                setFormData({ ...formData, client_last_name: e.target.value })
+              }
+              required
+            />
+            <br />
+            <br />
+            <p>Insert client's email address</p>
+            <TextField
+              variant="outlined"
+              type="email"
+              onChange={(e) =>
+                setFormData({ ...formData, client_email: e.target.value })
+              }
+              required
+            />
+            <br />
+            <br />
+            <p>Insert client's phone number</p>
+            <TextField
+              variant="outlined"
+              onChange={(e) =>
+                setFormData({
+                  ...formData,
+                  client_phone_number: e.target.value,
+                })
+              }
+              required
+            />
+            <br />
+            <br />
+            <p>Insert client's date of birth</p>
+            <TextField
+              id="date"
+              type="date"
+              sx={{ width: 250 }}
+              InputLabelProps={{
+                shrink: true,
+              }}
+              onChange={(e) =>
+                setFormData({ ...formData, client_birth_date: e.target.value })
+              }
+              required
+            />
+            <br />
+            <br />
+            <p>Select client's sex</p>
+            <TextField
+              select
+              sx={{ width: 250 }}
+              onChange={(e) =>
+                setFormData({ ...formData, client_sex: e.target.value })
+              }
+              required
+            >
+              <MenuItem value="M">Male</MenuItem>
+              <MenuItem value="F">Female</MenuItem>
+            </TextField>
+            <br />
+            <br />
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleClose}>Cancel</Button>
+            <Button type="submit">Add</Button>
+          </DialogActions>
+        </form>
       </Dialog>
     </div>
   );

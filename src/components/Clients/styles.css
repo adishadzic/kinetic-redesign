@@ -1,22 +1,22 @@
 .MuiTableContainer-root::-webkit-scrollbar,
-.MuiDialogContent-root::-webkit-scrollbar {
+.MuiPaper-root::-webkit-scrollbar {
   width: 8px;
 }
 
 .MuiTableContainer-root::-webkit-scrollbar-track,
-.MuiDialogContent-root::-webkit-scrollbar-track {
+.MuiPaper-root::-webkit-scrollbar-track {
   border-radius: 5rem;
   margin-top: 0.1rem;
 }
 
 .MuiTableContainer-root::-webkit-scrollbar-thumb,
-.MuiDialogContent-root::-webkit-scrollbar-thumb {
+.MuiPaper-root::-webkit-scrollbar-thumb {
   background-color: rgb(79, 194, 190);
   border-radius: 5rem;
 }
 
 .MuiTableContainer-root::-webkit-scrollbar-thumb:hover,
-.MuiDialogContent-root::-webkit-scrollbar-thumb:hover {
+.MuiPaper-root::-webkit-scrollbar-thumb:hover {
   background: rgb(79, 194, 190, 0.7);
 }
 
@@ -30,7 +30,7 @@
 
 .MuiTableRow-root.MuiTableRow-hover:hover {
   background-color: rgba(110, 219, 214, 0.35) !important;
-  transform: scale(1.005);
+  transform: scale(1.002);
 }
 
 .css-1q1u3t4-MuiTableRow-root,

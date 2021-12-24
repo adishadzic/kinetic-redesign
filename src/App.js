@@ -5,7 +5,7 @@ import Dashboard from "./components/Dashboard";
 import Calendar from "./components/Calendar";
 import Sidebar from "./components/Sidebar";
 import Clients from "./components/Clients";
-import ClimbingBoxLoader from "react-spinners/ClimbingBoxLoader";
+import PacmanLoader from "react-spinners/PacmanLoader";
 import { css } from "@emotion/react";
 
 const override = css`
@@ -49,10 +49,10 @@ const Loading = () => {
       style={{
         display: "flex",
         justifyContent: "center",
-        marginTop: 420,
+        marginTop: 390,
       }}
     >
-      <ClimbingBoxLoader css={override} color="#4FC2BE" size={30} />
+      <PacmanLoader css={override} color="#4FC2BE" size={30} />
     </div>
   );
 };
