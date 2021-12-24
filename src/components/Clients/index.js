@@ -87,7 +87,7 @@ export default function Clients() {
     setPage(0);
   };
 
-  const onSubmit = () => {};
+  // const onSubmit = () => {};
 
   return (
     <div className="main">
