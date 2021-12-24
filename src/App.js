@@ -49,7 +49,7 @@ const Loading = () => {
       style={{
         display: "flex",
         justifyContent: "center",
-        marginTop: 390,
+        marginTop: 380,
       }}
     >
       <PacmanLoader css={override} color="#4FC2BE" size={30} />
