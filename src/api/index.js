@@ -17,6 +17,9 @@ const Client = {
   async addNewClient(client) {
     return Connect.post("/clients", client);
   },
+  async removeClient(clientId) {
+    await Connect.delete(`/clients/${clientId}`);
+  },
 };
 
 export default Client;

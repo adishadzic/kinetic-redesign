@@ -33,12 +33,25 @@ import Client from "../../api/index";
 import moment from "moment";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import ConfirmDialog from "./ConfirmDialog";
 toast.configure();
 
-const successNotification = () =>
+const addSuccess = () =>
   toast.success("Client successfully added! 👌", {
     position: "top-right",
-    autoClose: 2000,
+    autoClose: 3000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "dark",
+  });
+
+const deleteSuccess = () =>
+  toast.success("Client successfully deleted! 👋", {
+    position: "top-right",
+    autoClose: 3000,
     hideProgressBar: false,
     closeOnClick: true,
     pauseOnHover: true,
@@ -78,6 +91,11 @@ export default function Clients() {
     errorMessage: {},
   });
   const [searchValue, setSearchValue] = useState("");
+  const [confirmDialog, setConfirmDialog] = useState({
+    isOpen: false,
+    title: "",
+    subTitle: "",
+  });
 
   const formattedClientsArray = async () => {
     try {
@@ -172,9 +190,20 @@ export default function Clients() {
 
       Client.addNewClient(formData);
       handleClose();
-      successNotification();
+      addSuccess();
       setTimeout(() => window.location.reload(), 1500);
     } else {
+      errorNotification();
+    }
+  };
+
+  const removeClient = async (clientId) => {
+    try {
+      setConfirmDialog({ ...confirmDialog, isOpen: false });
+      Client.removeClient(clientId);
+      deleteSuccess();
+      setTimeout(() => window.location.reload(), 1500);
+    } catch (error) {
       errorNotification();
     }
   };
@@ -292,8 +321,22 @@ export default function Clients() {
                               <Edit style={{ cursor: "pointer" }} />
                             </Tooltip>
                             <Tooltip title="Delete" placement="bottom">
-                              <DeleteOutline style={{ cursor: "pointer" }} />
+                              <DeleteOutline
+                                style={{ cursor: "pointer" }}
+                                onClick={() => {
+                                  setConfirmDialog({
+                                    isOpen: true,
+                                    title: "Are you sure?",
+                                    subTitle: "You can't undo this",
+                                    onConfirm: () => removeClient(row.id),
+                                  });
+                                }}
+                              />
                             </Tooltip>
+                            <ConfirmDialog
+                              confirmDialog={confirmDialog}
+                              setConfirmDialog={setConfirmDialog}
+                            />
                             <Tooltip title="Call" placement="right">
                               <a
                                 href={`tel: row.number`}
