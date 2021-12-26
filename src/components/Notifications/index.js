@@ -38,6 +38,18 @@ const errorNotification = () =>
     theme: "dark",
   });
 
+const apptRangeError = () =>
+  toast.error("Timeslot you entered is already booked 😕", {
+    position: "top-right",
+    autoClose: 3000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "dark",
+  });
+
 const newAppointmentSuccess = () =>
   toast.success("Appointment successfully added! 👌", {
     position: "top-right",
@@ -50,4 +62,10 @@ const newAppointmentSuccess = () =>
     theme: "dark",
   });
 
-export { addSuccess, deleteSuccess, errorNotification, newAppointmentSuccess };
+export {
+  addSuccess,
+  deleteSuccess,
+  errorNotification,
+  newAppointmentSuccess,
+  apptRangeError,
+};

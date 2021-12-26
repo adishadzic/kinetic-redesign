@@ -137,15 +137,20 @@ export default function Clients() {
       });
     } else if (!isError) {
       setFormData({ ...formData, error: false, errorMessage: {} });
-      let mutation = formData;
-      delete mutation.error;
-      delete mutation.errorMessage;
+      delete formData.error;
+      delete formData.errorMessage;
 
-      Client.addNewClient(formData);
-      handleClose();
-      addSuccess();
-      setTimeout(() => window.location.reload(), 1500);
+      try {
+        await Client.addNewClient(formData);
+        handleClose();
+        addSuccess();
+        setTimeout(() => window.location.reload(), 1500);
+      } catch (error) {
+        errorNotification();
+        console.log(error);
+      }
     } else {
+      console.error("Error occured");
       errorNotification();
     }
   };

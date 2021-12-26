@@ -23,8 +23,8 @@
 .services_table_header {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  margin: 2rem;
+  padding: 2rem 0.2rem 0.5rem 0.2rem;
+  justify-content: space-around;
 }
 
 .services_table_header_title {
@@ -35,8 +35,8 @@
 .services_table_body {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  margin: 2rem;
+  justify-content: space-around;
+  padding: 0.9rem 0rem 1.5rem 0rem;
 }
 
 .services_table_body span {

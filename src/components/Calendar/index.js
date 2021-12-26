@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import Paper from "@mui/material/Paper";
 import {
   Scheduler,
-  WeekView,
   Appointments,
+  WeekView,
 } from "@devexpress/dx-react-scheduler-material-ui";
 import { ViewState } from "@devexpress/dx-react-scheduler";
 import Button from "@mui/material/Button";
@@ -19,6 +19,7 @@ import { Client, Appointment, Service } from "../../api/index";
 import {
   errorNotification,
   newAppointmentSuccess,
+  apptRangeError,
 } from "../Notifications/index";
 import moment from "moment";
 import "./styles.css";
@@ -130,12 +131,16 @@ export default function Calendar() {
         clientID: formData.clientId,
       };
 
-      console.log(schedulerData);
-      Appointment.addNewAppointment(schedulerData);
-      handleClose();
-      newAppointmentSuccess();
-      setTimeout(() => window.location.reload(), 1500);
+      try {
+        await Appointment.addNewAppointment(schedulerData);
+        handleClose();
+        newAppointmentSuccess();
+        setTimeout(() => window.location.reload(), 1500);
+      } catch (error) {
+        apptRangeError();
+      }
     } else {
+      console.error("Something went wrong");
       errorNotification();
     }
   };
@@ -156,7 +161,7 @@ export default function Calendar() {
         </div>
         <Paper
           sx={{
-            width: 1400,
+            width: 1500,
             height: 700,
             marginTop: "2.1rem",
             backgroundColor: "#fff",

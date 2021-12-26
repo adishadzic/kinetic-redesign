@@ -43,6 +43,7 @@ const Appointment = {
     let appointmentsArr = response.data;
     let formattedApptsArr = appointmentsArr.map((appt) => {
       return {
+        id: appt.reservation_id,
         startDate: appt.startdate,
         endDate: appt.enddate,
         title: appt.title,

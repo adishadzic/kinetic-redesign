@@ -216,17 +216,18 @@ export default function Dashboard() {
                 borderRadius: "1rem",
                 boxShadow: "0 5px 15px rgb(0 0 0 / 10%)",
                 transition: "all 0.3s ease-in-out",
+                paddingBottom: 2,
                 "&:hover": {
                   transform: "scale(1.03)",
                   backgroundColor: "#3f4142",
-                  color: " #fff",
+                  color: "#fff",
                   cursor: "pointer",
                 },
               }}
             >
               <h4 className="dash_title">Usluge</h4>
               <div className="services_table_header">
-                <p className="services_table_header_title">Usluga</p>
+                <p className="services_table_header_title">Title</p>
                 <AccessTimeIcon />
                 <EuroIcon />
               </div>
@@ -239,6 +240,14 @@ export default function Dashboard() {
                   </div>
                 );
               })}
+              <p
+                style={{
+                  fontSize: "1rem",
+                  marginLeft: "2.6rem",
+                }}
+              >
+                Load more...
+              </p>
             </ItemBig>
           </Box>
           <Box gridColumn="span 3">
