@@ -4,15 +4,20 @@ import {
   DialogTitle,
   DialogContent,
   DialogActions,
-  Typography,
   Button,
+  DialogContentText,
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
+import Slide from "@mui/material/Slide";
+
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="down" ref={ref} {...props} />;
+});
 
 const useStyles = makeStyles((theme) => ({
   dialog: {
     position: "absolute",
-    top: 50,
+    top: 70,
   },
 }));
 
@@ -21,21 +26,36 @@ function ConfirmDialog(props) {
   const classes = useStyles();
 
   return (
-    <Dialog open={confirmDialog.isOpen} classes={{ paper: classes.dialog }}>
-      <DialogTitle></DialogTitle>
-      <DialogContent>
-        <Typography variant="h6">{confirmDialog.title}</Typography>
-        <Typography variant="subtitle2">{confirmDialog.subTitle}</Typography>
-      </DialogContent>
-      <DialogActions>
-        <Button
-          onClick={() => setConfirmDialog({ ...confirmDialog, isOpen: false })}
-        >
-          No
-        </Button>
-        <Button onClick={confirmDialog.onConfirm}>Yes</Button>
-      </DialogActions>
-    </Dialog>
+    <div>
+      <Dialog
+        open={confirmDialog.isOpen}
+        classes={{ paper: classes.dialog, root: classes.root }}
+        TransitionComponent={Transition}
+      >
+        <DialogTitle style={{ fontFamily: "Montserrat, sans-serif" }}>
+          <h4>
+            Are you sure you want to delete{" "}
+            <span style={{ backgroundColor: "rgba(110, 219, 214, 1)" }}>
+              {confirmDialog.user}
+            </span>{" "}
+            from the database?
+          </h4>
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText>This cannot be undone</DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button
+            onClick={() =>
+              setConfirmDialog({ ...confirmDialog, isOpen: false })
+            }
+          >
+            No
+          </Button>
+          <Button onClick={confirmDialog.onConfirm}>Yes</Button>
+        </DialogActions>
+      </Dialog>
+    </div>
   );
 }
 

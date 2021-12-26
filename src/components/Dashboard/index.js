@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import calendar from "../../assets/images/calendar.png";
@@ -16,6 +16,7 @@ import {
 } from "@devexpress/dx-react-scheduler-material-ui";
 import { styled } from "@mui/material/styles";
 import { useHistory } from "react-router";
+import Client from "../../api/index";
 import "./styles.css";
 
 let currentDate = new Date();
@@ -93,6 +94,17 @@ const ItemBig = styled(Paper)(() => ({
 
 export default function Dashboard() {
   let history = useHistory();
+
+  const [clientsTotal, setClientsTotal] = useState(0);
+
+  const totalClients = async () => {
+    let res = await Client.getAllClients();
+    setClientsTotal(res.length);
+  };
+
+  useEffect(() => {
+    totalClients();
+  }, []);
 
   return (
     <div className="main">
@@ -203,7 +215,7 @@ export default function Dashboard() {
             >
               <h4 className="dash_title">Klijenti</h4>
               <div className="flexbox">
-                <span className="clients_no">250</span>
+                <span className="clients_no">{clientsTotal}</span>
                 <img
                   className="dash_image_long_clients"
                   src={clients}

@@ -93,8 +93,6 @@ export default function Clients() {
   const [searchValue, setSearchValue] = useState("");
   const [confirmDialog, setConfirmDialog] = useState({
     isOpen: false,
-    title: "",
-    subTitle: "",
   });
 
   const formattedClientsArray = async () => {
@@ -300,7 +298,11 @@ export default function Clients() {
                             return (
                               <TableCell
                                 key={column.id}
-                                style={{ textAlign: "center" }}
+                                style={{
+                                  textAlign: "center",
+                                  fontFamily: "Montserrat, sans-serif",
+                                  fontWeight: 600,
+                                }}
                               >
                                 {column.format && typeof value === "number"
                                   ? column.format(value)
@@ -326,17 +328,12 @@ export default function Clients() {
                                 onClick={() => {
                                   setConfirmDialog({
                                     isOpen: true,
-                                    title: "Are you sure?",
-                                    subTitle: "You can't undo this",
+                                    user: `${row.name}`,
                                     onConfirm: () => removeClient(row.id),
                                   });
                                 }}
                               />
                             </Tooltip>
-                            <ConfirmDialog
-                              confirmDialog={confirmDialog}
-                              setConfirmDialog={setConfirmDialog}
-                            />
                             <Tooltip title="Call" placement="right">
                               <a
                                 href={`tel: row.number`}
@@ -368,6 +365,10 @@ export default function Clients() {
             onRowsPerPageChange={handleChangeRowsPerPage}
           />
         </Paper>
+        <ConfirmDialog
+          confirmDialog={confirmDialog}
+          setConfirmDialog={setConfirmDialog}
+        />
       </div>
       <Dialog open={open}>
         <DialogTitle>Add new client</DialogTitle>
