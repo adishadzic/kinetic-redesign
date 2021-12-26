@@ -32,14 +32,14 @@ function ConfirmDialog(props) {
         classes={{ paper: classes.dialog, root: classes.root }}
         TransitionComponent={Transition}
       >
-        <DialogTitle style={{ fontFamily: "Montserrat, sans-serif" }}>
-          <h4>
-            Are you sure you want to delete{" "}
-            <span style={{ backgroundColor: "rgba(110, 219, 214, 1)" }}>
-              {confirmDialog.user}
-            </span>{" "}
-            from the database?
-          </h4>
+        <DialogTitle
+          style={{ fontFamily: "Montserrat, sans-serif", fontWeight: 600 }}
+        >
+          Are you sure you want to delete{" "}
+          <span style={{ backgroundColor: "rgba(110, 219, 214, 0.4)" }}>
+            {confirmDialog.user}
+          </span>{" "}
+          from the database?
         </DialogTitle>
         <DialogContent>
           <DialogContentText>This cannot be undone</DialogContentText>

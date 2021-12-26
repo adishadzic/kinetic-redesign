@@ -16,44 +16,12 @@ import {
 } from "@devexpress/dx-react-scheduler-material-ui";
 import { styled } from "@mui/material/styles";
 import { useHistory } from "react-router";
-import Client from "../../api/index";
+import CircularProgress from "@mui/material/CircularProgress";
+import { Client } from "../../api/index";
 import "./styles.css";
 
 let currentDate = new Date();
 let hours = currentDate.getHours();
-
-const schedulerData = [
-  {
-    startDate: "2021-12-12T08:00",
-    endDate: "2021-12-12T09:45",
-    title: "Meeting",
-  },
-  {
-    startDate: "2021-12-12T10:45",
-    endDate: "2021-12-12T11:35",
-    title: "Training",
-  },
-  {
-    startDate: "2021-12-13T08:00",
-    endDate: "2021-12-13T09:45",
-    title: "Meeting",
-  },
-  {
-    startDate: "2021-12-14T10:45",
-    endDate: "2021-12-14T11:35",
-    title: "Training",
-  },
-  {
-    startDate: "2021-12-09T08:00",
-    endDate: "2021-12-09T09:45",
-    title: "Meeting",
-  },
-  {
-    startDate: "2021-12-09T10:45",
-    endDate: "2021-12-09T11:35",
-    title: "Training",
-  },
-];
 
 let services = [
   {
@@ -95,15 +63,25 @@ const ItemBig = styled(Paper)(() => ({
 export default function Dashboard() {
   let history = useHistory();
 
-  const [clientsTotal, setClientsTotal] = useState(0);
+  const [clientsTotal, setClientsTotal] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const totalClients = async () => {
-    let res = await Client.getAllClients();
-    setClientsTotal(res.length);
+    try {
+      setLoading(true);
+      let res = await Client.getAllClients();
+      setClientsTotal(res.length);
+      setLoading(false);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   useEffect(() => {
     totalClients();
+    return () => {
+      setClientsTotal(null);
+    };
   }, []);
 
   return (
@@ -215,7 +193,13 @@ export default function Dashboard() {
             >
               <h4 className="dash_title">Klijenti</h4>
               <div className="flexbox">
-                <span className="clients_no">{clientsTotal}</span>
+                <span className="clients_no">
+                  {loading ? (
+                    <CircularProgress sx={{ color: "#4FC2BE" }} />
+                  ) : (
+                    clientsTotal
+                  )}
+                </span>
                 <img
                   className="dash_image_long_clients"
                   src={clients}
@@ -291,7 +275,7 @@ export default function Dashboard() {
             borderRadius: "1rem",
           }}
         >
-          <Scheduler data={schedulerData}>
+          <Scheduler>
             <ViewState currentDate={currentDate} />
             <DayView startDayHour={8} endDayHour={17} excludedDays={[0, 6]} />
             <Appointments />

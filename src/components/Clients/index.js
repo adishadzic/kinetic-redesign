@@ -29,48 +29,13 @@ import {
 } from "@mui/icons-material";
 import "./styles.css";
 import HashLoader from "react-spinners/HashLoader";
-import Client from "../../api/index";
-import moment from "moment";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { Client } from "../../api/index";
+import {
+  addSuccess,
+  deleteSuccess,
+  errorNotification,
+} from "../Notifications/index";
 import ConfirmDialog from "./ConfirmDialog";
-toast.configure();
-
-const addSuccess = () =>
-  toast.success("Client successfully added! 👌", {
-    position: "top-right",
-    autoClose: 3000,
-    hideProgressBar: false,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
-    progress: undefined,
-    theme: "dark",
-  });
-
-const deleteSuccess = () =>
-  toast.success("Client successfully deleted! 👋", {
-    position: "top-right",
-    autoClose: 3000,
-    hideProgressBar: false,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
-    progress: undefined,
-    theme: "dark",
-  });
-
-const errorNotification = () =>
-  toast.error("Error occured 🤯", {
-    position: "top-right",
-    autoClose: 3000,
-    hideProgressBar: false,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
-    progress: undefined,
-    theme: "dark",
-  });
 
 const columns = [
   { id: "name", label: "NAME", width: 80 },
@@ -95,21 +60,11 @@ export default function Clients() {
     isOpen: false,
   });
 
-  const formattedClientsArray = async () => {
+  const getClients = async () => {
     try {
       setLoading(true);
       let res = await Client.getAllClients();
-      let newArray = res.map((client) => {
-        return {
-          id: client.client_id,
-          name: client.client_first_name + " " + client.client_last_name,
-          number: client.client_phone_number,
-          email: client.client_email,
-          dob: moment(client.client_birth_date).format("MMMM Do YYYY"),
-          sex: client.client_sex,
-        };
-      });
-      setClients(newArray.reverse());
+      setClients(res.reverse());
       setLoading(false);
     } catch (error) {
       console.error(error);
@@ -138,7 +93,7 @@ export default function Clients() {
       let result = searchData(searchValue);
       setClients(result);
     } else {
-      formattedClientsArray();
+      getClients();
     }
     // eslint-disable-next-line
   }, [searchValue]);
@@ -371,7 +326,9 @@ export default function Clients() {
         />
       </div>
       <Dialog open={open}>
-        <DialogTitle>Add new client</DialogTitle>
+        <DialogTitle style={{ padding: "16px 0px 0px 23px" }}>
+          Add new client
+        </DialogTitle>
         <form onSubmit={onSubmit}>
           <DialogContent>
             <DialogContentText>
